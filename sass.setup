@@ -1,0 +1,6 @@
+(compile -O -X lazy-ffi -s sass.scm -j sass)
+(compile -O -X lazy-ffi -s sass.import.scm)
+(install-extension
+  'sass
+  '("sass.so" "sass.import.so")
+  '((version "0.1")))

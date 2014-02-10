@@ -1,0 +1,5 @@
+((license "BSD")
+ (category web)
+ (depends lazyffi)
+ (author "Matt Gushee")
+ (synopsis "A wrapper for the CSS preprocessing library libsass."))
