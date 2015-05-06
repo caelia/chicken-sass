@@ -9,7 +9,7 @@
         (import foreign)
         (use foreigners)
 
-(foreign-declare "#include <sass_functions.h")
+(foreign-declare "#include <sass_functions.h>")
 
 ;;; Forward declaration
 ; struct Sass_Import;

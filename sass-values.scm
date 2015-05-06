@@ -28,10 +28,13 @@
   ((comma separator/comma) SASS_COMMA)
   ((space separator/space) SASS_SPACE))
 
+(define-record sass-value tag ptr)
+
 ;; Return the sass tag for a generic sass value
 ;; Check is needed before accessing specific values!
-(define (get-tag value)
-  ((foreign-lambda (enum "Sass_Tag") sass_value_get_tag (c-pointer "Sass_Value")) value))
+(define get-tag sass-value-tag)
+; (define (get-tag value)
+  ; ((foreign-lambda (enum "Sass_Tag") sass_value_get_tag (c-pointer "Sass_Value")) value))
 ; enum Sass_Tag sass_value_get_tag (const union Sass_Value* v);
 
 ;; Check value to be of a specific type
