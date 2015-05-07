@@ -11,6 +11,8 @@
 
 (foreign-declare "#include <sass_functions.h>")
 
+(include "sass-common-types.scm")
+
 ;;; Forward declaration
 ; struct Sass_Import;
 ; struct Sass_Options;
