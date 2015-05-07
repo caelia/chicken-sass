@@ -6,6 +6,7 @@
 
 (module sass-values
         *
+        (import scheme chicken)
         (import foreign)
         (use foreigners)
 
@@ -28,193 +29,271 @@
   ((comma separator/comma) SASS_COMMA)
   ((space separator/space) SASS_SPACE))
 
-(define-record sass-value tag ptr)
+(define-foreign-type sass-value (union "Sass_Value"))
 
-;; Return the sass tag for a generic sass value
-;; Check is needed before accessing specific values!
-(define get-tag sass-value-tag)
-; (define (get-tag value)
-  ; ((foreign-lambda (enum "Sass_Tag") sass_value_get_tag (c-pointer "Sass_Value")) value))
-; enum Sass_Tag sass_value_get_tag (const union Sass_Value* v);
+(define-record sass-null ptr)
+(define-record sass-number ptr)
+(define-record sass-string ptr)
+(define-record sass-boolean ptr)
+(define-record sass-color ptr)
+(define-record sass-list ptr)
+(define-record sass-map ptr)
+(define-record sass-error ptr)
+(define-record sass-warning ptr)
 
-;; Check value to be of a specific type
-;; Can also be used before accessing properties!
-(define (null? value)
-  ((foreign-lambda bool sass_value_is_null (c-pointer "Sass_Value")) value))
-; bool sass_value_is_null (const union Sass_Value* v);
-(define (number? value)
-  ((foreign-lambda bool sass_value_is_number (c-pointer "Sass_Value")) value))
-; bool sass_value_is_number (const union Sass_Value* v);
-(define (string? value)
-  ((foreign-lambda bool sass_value_is_string (c-pointer "Sass_Value")) value))
-; bool sass_value_is_string (const union Sass_Value* v);
-(define (boolean? value)
-  ((foreign-lambda bool sass_value_is_boolean (c-pointer "Sass_Value")) value))
-; bool sass_value_is_boolean (const union Sass_Value* v);
-(define (color? value)
-  ((foreign-lambda bool sass_value_is_color (c-pointer "Sass_Value")) value))
-; bool sass_value_is_color (const union Sass_Value* v);
-(define (list? value)
-  ((foreign-lambda bool sass_value_is_list (c-pointer "Sass_Value")) value))
-; bool sass_value_is_list (const union Sass_Value* v);
-(define (map? value)
-  ((foreign-lambda bool sass_value_is_map (c-pointer "Sass_Value")) value))
-; bool sass_value_is_map (const union Sass_Value* v);
-(define (error? value)
-  ((foreign-lambda bool sass_value_is_error (c-pointer "Sass_Value")) value))
-; bool sass_value_is_error (const union Sass_Value* v);
-(define (warning? value)
-  ((foreign-lambda bool sass_value_is_warning (c-pointer "Sass_Value")) value))
-; bool sass_value_is_warning (const union Sass_Value* v);
+(define (sass-value-tag sv-ptr)
+  ((foreign-lambda sass-tag sass_value_get_tag (c-pointer sass-value)) sv-ptr))
+
+(define (svp->sass-value ptr)
+  (case (sass-value-tag ptr)
+    ((null) (make-sass-null ptr))
+    ((number) (make-sass-number ptr))
+    ((string) (make-sass-string ptr))
+    ((boolean) (make-sass-boolean ptr))
+    ((color) (make-sass-color ptr))
+    ((list) (make-sass-list ptr))
+    ((map) (make-sass-map ptr))
+    ((error) (make-sass-error ptr))
+    ((warning) (make-sass-warning ptr))))
+
+(define (sass-value-ptr val)
+  (cond
+    ((sass-null? val) (sass-null-ptr val))
+    ((sass-number? val) (sass-number-ptr val))
+    ((sass-string? val) (sass-string-ptr val))
+    ((sass-boolean? val) (sass-boolean-ptr val))
+    ((sass-color? val) (sass-color-ptr val))
+    ((sass-list? val) (sass-list-ptr val))
+    ((sass-map? val) (sass-map-ptr val))
+    ((sass-error? val) (sass-error-ptr val))
+    ((sass-warning? val) (sass-warning-ptr val))))
 
 ;; Getters and setters for Sass_Number
-(define (get-num-value val)
-  ((foreign-lambda double sass_number_get_value (c-pointer "Sass_Value")) val))
+(define (get-num-value num)
+  ((foreign-lambda double sass_number_get_value (c-pointer sass-value))
+   (sass-number-ptr num)))
 ; double sass_number_get_value (const union Sass_Value* v);
-(define (set-num-value! valp newval)
-  ((foreign-lambda void sass_number_set_value (c-pointer "Sass_Value") double) valp newval))
+(define (set-num-value! num val)
+  ((foreign-lambda void sass_number_set_value (c-pointer sass-value) double)
+   (sass-number-ptr num) val))
 ; void sass_number_set_value (union Sass_Value* v, double value);
-(define (get-num-unit val)
-  ((foreign-lambda c-string sass_number_get_unit (c-pointer "Sass_Value")) val))
+(define (get-num-unit num)
+  ((foreign-lambda c-string sass_number_get_unit (c-pointer sass-value))
+   (sass-number-ptr num)))
 ; const char* sass_number_get_unit (const union Sass_Value* v);
-(define (set-num-unit! val valp unt)
-  ((foreign-lambda void sass_number_set_unit (c-pointer "Sass_Value") c-string) valp unt))
+(define (set-num-unit! num uni)
+  ((foreign-lambda void sass_number_set_unit (c-pointer sass-value) c-string)
+   (sass-number-ptr num) uni))
 ; void sass_number_set_unit (union Sass_Value* v, char* unit);
 
 ;; Getters and setters for Sass_String
 (define (get-string-value str)
-  ((foreign-lambda c-string sass_string_get_value (c-pointer "Sass_Value")) str))
+  ((foreign-lambda c-string sass_string_get_value (c-pointer sass-value))
+   (sass-string-ptr str)))
 ; const char* sass_string_get_value (const union Sass_Value* v);
 (define (set-string-value! str val)
-  ((foreign-lambda void sass_string_set_value (c-pointer "Sass_Value") c-string) str val))
+  ((foreign-lambda void sass_string_set_value (c-pointer sass-value) c-string)
+   (sass-string-ptr str) val))
 ; void sass_string_set_value (union Sass_Value* v, char* value);
 
 ;; Getters and setters for Sass_Boolean
-(define (get-bool-value boolp)
-  ((foreign-lambda bool sass_boolean_get_value (c-pointer "Sass_Value")) boolp))
+(define (get-bool-value bool)
+  ((foreign-lambda bool sass_boolean_get_value (c-pointer sass-value))
+   (sass-boolean-ptr bool)))
 ; bool sass_boolean_get_value (const union Sass_Value* v);
-(define (set-bool-value! boolp val)
-  ((foreign-lambda void sass_boolean_set_value (c-pointer "Sass_Value") bool) boolp val)
+(define (set-bool-value! bool val)
+  ((foreign-lambda void sass_boolean_set_value (c-pointer sass-value) bool)
+   (sass-boolean-ptr bool) val))
 ; void sass_boolean_set_value (union Sass_Value* v, bool value);
 
-;;;; FIXED SYNTAX ABOVE HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; Getters and setters for Sass_Color
-(define (get-red )
-  ((foreign-lambda double sass_color_get_r (c-pointer "Sass_Value")))
+(define (get-red color)
+  ((foreign-lambda double sass_color_get_r (c-pointer sass-value))
+   (sass-color-ptr color)))
 ; double sass_color_get_r (const union Sass_Value* v);
-(define (set-red! )
-  ((foreign-lambda void sass_color_set_r ((c-pointer "Sass_Value") double)))
+(define (set-red! color val)
+  ((foreign-lambda void sass_color_set_r (c-pointer sass-value) double)
+   (sass-color-ptr color) val))
 ; void sass_color_set_r (union Sass_Value* v, double r);
-(define (get-green )
-  ((foreign-lambda double sass_color_get_g (c-pointer "Sass_Value")))
+(define (get-green color)
+  ((foreign-lambda double sass_color_get_g (c-pointer sass-value))
+   (sass-color-ptr color)))
 ; double sass_color_get_g (const union Sass_Value* v);
-(define (set-green! )
-  ((foreign-lambda void sass_color_set_g ((c-pointer "Sass_Value") double)))
-; void sass_color_set_g (union Sass_Value* v, double g);
-(define (get-blue )
-  ((foreign-lambda double sass_color_get_b (c-pointer "Sass_Value")))
+(define (set-green! color val)
+  ((foreign-lambda void sass_color_set_g (c-pointer sass-value) double)
+   (sass-color-ptr color) val))
+; void sass_color_set_g (union Sass_Value* v, double r);
+(define (get-blue color)
+  ((foreign-lambda double sass_color_get_b (c-pointer sass-value))
+   (sass-color-ptr color)))
 ; double sass_color_get_b (const union Sass_Value* v);
-(define (set-blue! )
-  ((foreign-lambda void sass_color_set_b ((c-pointer "Sass_Value") double)))
-; void sass_color_set_b (union Sass_Value* v, double b);
-(define (get-alpha )
-  ((foreign-lambda double sass_color_get_a (c-pointer "Sass_Value")))
+(define (set-blue! color val)
+  ((foreign-lambda void sass_color_set_b (c-pointer sass-value) double)
+   (sass-color-ptr color) val))
+; void sass_color_set_b (union Sass_Value* v, double r);
+(define (get-alpha color)
+  ((foreign-lambda double sass_color_get_a (c-pointer sass-value))
+   (sass-color-ptr color)))
 ; double sass_color_get_a (const union Sass_Value* v);
-(define (set-alpha! )
-  ((foreign-lambda void sass_color_set_a ((c-pointer "Sass_Value") double)))
-; void sass_color_set_a (union Sass_Value* v, double a);
+(define (set-alpha! color val)
+  ((foreign-lambda void sass_color_set_a (c-pointer sass-value) double)
+   (sass-color-ptr color) val))
+; void sass_color_set_a (union Sass_Value* v, double r);
 
 ;; Getter for the number of items in list
-(define (get-list-length )
-  ((foreign-lambda size_t sass_list_get_length (c-pointer "Sass_Value")))
+(define (get-list-length lst)
+  ((foreign-lambda size_t sass_list_get_length (c-pointer sass-value))
+   (sass-list-ptr lst)))
 ; size_t sass_list_get_length (const union Sass_Value* v);
 ;; Getters and setters for Sass_List
-(define (get-list-separator )
-  ((foreign-lambda (enum "Sass_Separator") sass_list_get_separator (c-pointer "Sass_Value")))
+(define (get-list-separator lst)
+  ((foreign-lambda (enum "Sass_Separator") sass_list_get_separator (c-pointer sass-value))
+   (sass-list-ptr lst)))
 ; enum Sass_Separator sass_list_get_separator (const union Sass_Value* v);
-(define (set-list-separator! )
-  ((foreign-lambda void sass_list_set_separator ((c-pointer "Sass_Value") enum Sass_Separator value)))
+(define (set-list-separator! lst sep)
+  ((foreign-lambda void sass_list_set_separator (c-pointer sass-value) separator)
+   (sass-list-ptr lst) sep))
 ; void sass_list_set_separator (union Sass_Value* v, enum Sass_Separator value);
 ;; Getters and setters for Sass_List values
-(define (get-list-value )
-  ((foreign-lambda (union "Sass_Value*") sass_list_get_value (const union Sass_Value* v size_t)))
+(define (get-list-value lst idx)
+  (let ((raw ((foreign-lambda (c-pointer sass-value)
+                              sass_list_get_value
+                              (c-pointer sass-value)
+                              size_t)
+              (sass-list-ptr lst) idx)))
+    (svp->sass-value raw)))
 ; union Sass_Value* sass_list_get_value (const union Sass_Value* v, size_t i);
-(define (set-list-value! )
-  ((foreign-lambda void sass_list_set_value ((c-pointer "Sass_Value") size_t union Sass_Value* value)))
+(define (set-list-value! lst idx val)
+  ((foreign-lambda void sass_list_set_value (c-pointer sass-value) size_t (c-pointer sass-value))
+   (sass-list-ptr lst) idx (sass-value-ptr val)))
 ; void sass_list_set_value (union Sass_Value* v, size_t i, union Sass_Value* value);
 
 ;; Getter for the number of items in map
-(define (get-map-length )
-  ((foreign-lambda size_t sass_map_get_length (c-pointer "Sass_Value")))
+(define (get-map-length mapp)
+  ((foreign-lambda size_t sass_map_get_length (c-pointer sass-value))
+   (sass-map-ptr mapp)))
 ; size_t sass_map_get_length (const union Sass_Value* v);
 ;; Getters and setters for Sass_Map keys and values
-(define (get-map-key )
-  ((foreign-lambda (union "Sass_Value*") sass_map_get_key (const union Sass_Value* v size_t)))
-; union Sass_Value* sass_map_get_key (const union Sass_Value* v, size_t i);
-(define (set-map-key! )
-  ((foreign-lambda void sass_map_set_key ((c-pointer "Sass_Value") size_t union Sass_Value*)))
+(define (get-map-key mapp idx)
+  (let ((raw ((foreign-lambda (c-pointer sass-value)
+                              sass_map_get_key
+                              (c-pointer sass-value)
+                              size_t)
+              (sass-map-ptr mapp) idx)))
+    (svp->sass-value raw)))
+; union Sass_Value* sass_map_get_key (c-pointer sass-value) v, size_t i);
+(define (set-map-key! mapp idx val)
+  ((foreign-lambda void sass_map_set_key (c-pointer sass-value) size_t (c-pointer sass-value))
+   (sass-map-ptr mapp) idx (sass-value-ptr val)))
 ; void sass_map_set_key (union Sass_Value* v, size_t i, union Sass_Value*);
-(define (get-map-value )
-  ((foreign-lambda (union "Sass_Value*") sass_map_get_value (const union Sass_Value* v size_t)))
-; union Sass_Value* sass_map_get_value (const union Sass_Value* v, size_t i);
-(define (set-map-value! )
-  ((foreign-lambda void sass_map_set_value ((c-pointer "Sass_Value") size_t union Sass_Value*)))
+(define (get-map-value mapp idx)
+  (let ((raw ((foreign-lambda (c-pointer sass-value)
+                              sass_map_get_value
+                              (c-pointer sass-value)
+                              size_t)
+              (sass-map-ptr mapp) idx)))
+    (svp->sass-value raw)))
+; union Sass_Value* sass_map_get_value (c-pointer sass-value) v, size_t i);
+(define (set-map-value! mapp idx val)
+  ((foreign-lambda void sass_map_set_value (c-pointer sass-value) size_t (c-pointer sass-value))
+   (sass-map-ptr mapp) idx (sass-value-ptr val)))
 ; void sass_map_set_value (union Sass_Value* v, size_t i, union Sass_Value*);
 
 ;; Getters and setters for Sass_Error
-(define (get-error-message )
-  ((foreign-lambda c-string sass_error_get_message (c-pointer "Sass_Value")))
+(define (get-error-message err)
+  ((foreign-lambda c-string sass_error_get_message (c-pointer sass-value))
+   (sass-error-ptr err)))
 ; char* sass_error_get_message (const union Sass_Value* v);
-(define (set-error-message! )
-  ((foreign-lambda void sass_error_set_message ((c-pointer "Sass_Value") c-string)))
+(define (set-error-message! err msg)
+  ((foreign-lambda void sass_error_set_message (c-pointer sass-value) c-string)
+   (sass-error-ptr err) msg))
 ; void sass_error_set_message (union Sass_Value* v, char* msg);
 
 ;; Getters and setters for Sass_Warning
-(define (get-warning-message )
-  ((foreign-lambda c-string sass_warning_get_message (c-pointer "Sass_Value")))
+(define (get-warning-message warg)
+  ((foreign-lambda c-string sass_warning_get_message (c-pointer sass-value))
+   (sass-warning-ptr warg)))
 ; char* sass_warning_get_message (const union Sass_Value* v);
-(define (set-warning-message! )
-  ((foreign-lambda void sass_warning_set_message ((c-pointer "Sass_Value") c-string msg)))
+(define (set-warning-message! warg msg)
+  ((foreign-lambda void sass_warning_set_message (c-pointer sass-value) c-string)
+   (sass-warning-ptr warg) msg))
 ; void sass_warning_set_message (union Sass_Value* v, char* msg);
 
 ;; Creator functions for all value types
-(define (mk-null )
-  ((foreign-lambda (union "Sass_Value*") sass_make_null    (void)))
+(define (make-null)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_null))))
+    (make-sass-null ptr)))
 ; union Sass_Value* sass_make_null    (void);
-(define (mk-boolean )
-  ((foreign-lambda (union "Sass_Value*") sass_make_boolean (bool)))
+(define (make-boolean bool)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_boolean
+                              bool)
+              bool)))
+    (make-sass-boolean ptr)))
 ; union Sass_Value* sass_make_boolean (bool val);
-(define (mk-string )
-  ((foreign-lambda (union "Sass_Value*") sass_make_string  (c-string)))
+(define (make-sstring str)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_string
+                              c-string)
+              str)))
+    (make-sass-string ptr)))
 ; union Sass_Value* sass_make_string  (const char* val);
-(define (mk-number )
-  ((foreign-lambda (union "Sass_Value*") sass_make_number  (double c-string)))
+(define (make-number num un)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_number
+                              double c-string)
+              num un)))
+    (make-sass-number ptr)))
 ; union Sass_Value* sass_make_number  (double val, const char* unit);
-(define (mk-color )
-  ((foreign-lambda (union "Sass_Value*") sass_make_color   (double double double double)))
+(define (make-color r g b a)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_color
+                              double double double double)
+              r g b a)))
+    (make-sass-color ptr)))
 ; union Sass_Value* sass_make_color   (double r, double g, double b, double a);
-(define (mk-list )
-  ((foreign-lambda (union "Sass_Value*") sass_make_list    (size_t enum Sass_Separator sep)))
+(define (make-list len sep)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_list
+                              size_t separator)
+              len sep)))
+    (make-sass-list ptr)))
 ; union Sass_Value* sass_make_list    (size_t len, enum Sass_Separator sep);
-(define (mk-map )
-  ((foreign-lambda (union "Sass_Value*") sass_make_map     (size_t)))
+(define (make-map len)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_map
+                              size_t)
+              len)))
+    (make-sass-map ptr)))
 ; union Sass_Value* sass_make_map     (size_t len);
-(define (mk-error )
-  ((foreign-lambda (union "Sass_Value*") sass_make_error   (c-string)))
+(define (make-error msg)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_error
+                              c-string)
+              msg)))
+    (make-sass-error ptr)))
 ; union Sass_Value* sass_make_error   (const char* msg);
-(define (mk-warning )
-  ((foreign-lambda (union "Sass_Value*") sass_make_warning (c-string)))
+(define (make-warning msg)
+  (let ((ptr ((foreign-lambda (c-pointer sass-value)
+                              sass_make_warning
+                              c-string)
+              msg)))
+    (make-sass-warning ptr)))
 ; union Sass_Value* sass_make_warning (const char* msg);
 
 ;; Generic destructor function for all types
 ;; Will release memory of all associated Sass_Values
 ;; Means we will delete recursively for lists and maps
-(define (delete )
-  ((foreign-lambda void sass_delete_value (union Sass_Value* val)))
+(define (delete val)
+  ((foreign-lambda void sass_delete_value (c-pointer sass-value))
+   (sass-value-ptr val)))
 ; void sass_delete_value (union Sass_Value* val);
 
 ;; Make a deep cloned copy of the given sass value
-(define (clone )
-  ((foreign-lambda (union "Sass_Value*") sass_clone_value (const union Sass_Value* val)))
+(define (clone val)
+  ((foreign-lambda (c-pointer sass-value) sass_clone_value (c-pointer sass-value))
+   (sass-value-ptr val)))
 ; union Sass_Value* sass_clone_value (const union Sass_Value* val);
+
+) ; END MODULE
