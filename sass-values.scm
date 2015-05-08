@@ -12,6 +12,8 @@
 
 (foreign-declare "#include <sass_values.h>")
 
+(include "sass-common-types.scm")
+
 (define-foreign-enum-type (sass-tag int)
   (sass-tag->int int->sass-tag)
   ((boolean tag/boolean) SASS_BOOLEAN)
@@ -28,8 +30,6 @@
   (separator->int int->separator)
   ((comma separator/comma) SASS_COMMA)
   ((space separator/space) SASS_SPACE))
-
-(define-foreign-type sass-value (union "Sass_Value"))
 
 (define-record sass-null ptr)
 (define-record sass-number ptr)

@@ -1,3 +1,5 @@
+(define-foreign-type sass-value (union "Sass_Value"))
+
 (define-foreign-type sass-compiler (struct "Sass_Compiler"))
 ;;; Forward declaration
 ; struct Sass_Compiler;
