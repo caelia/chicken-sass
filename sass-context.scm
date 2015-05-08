@@ -6,6 +6,7 @@
 
 (module sass-context
         *
+        (import scheme chicken)
         (import foreign)
         (use foreigners)
 
