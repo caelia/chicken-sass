@@ -1,6 +1,15 @@
-(compile -O -X lazy-ffi -s sass.scm -j sass)
-(compile -O -X lazy-ffi -s sass.import.scm)
+(compile -O -s sass-values.scm -j sass-values)
+(compile -O -s sass-values.import.scm)
+(compile -O -s sass-functions.scm -j sass-functions)
+(compile -O -s sass-functions.import.scm)
+(compile -O -s sass-context.scm -j sass-context)
+(compile -O -s sass-context.import.scm)
+(compile -O -s sass.scm -j sass)
+(compile -O -s sass.import.scm)
 (install-extension
   'sass
-  '("sass.so" "sass.import.so")
+  '("sass-values.so" "sass-values.import.so"
+    "sass-functions.so" "sass-functions.import.so"
+    "sass-context.so" "sass-context.import.so"
+    "sass.so" "sass.import.so")
   '((version "0.1")))
