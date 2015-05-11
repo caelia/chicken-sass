@@ -72,7 +72,8 @@
 (define make-importer
   (foreign-lambda importer-entry
                   sass_make_importer
-                  importer-fn
+                  ; importer-fn
+                  c-pointer
                   double
                   c-pointer))
 ; Sass_Importer_Entry sass_make_importer (Sass_Importer_Fn importer, double priority, void* cookie);
@@ -223,7 +224,8 @@
   (foreign-lambda function-entry
                   sass_make_function
                   c-string
-                  function-fn
+                  ; function-fn
+                  c-pointer
                   c-pointer))
 ; Sass_Function_Entry sass_make_function (const char* signature, Sass_Function_Fn cb, void* cookie);
 
