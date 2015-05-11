@@ -6,23 +6,27 @@
 
 (module sass
         *
+        (import scheme chicken)
         (import foreign)
         (import foreigners)
+        (require-library sass-values sass-functions sass-context)
+        (reexport sass-values sass-functions sass-context)
 
 (foreign-declare "#include <sass.h>")
 
-(define-foreign-enum-type (output-style int)
-  (output-style->int int->output-style)
-  ((nested style/nested) SASS_STYLE_NESTED)
-  ((expanded style/expanded) SASS_STYLE_EXPANDED)
-  ((compact style/compact) SASS_STYLE_COMPACT)
-  ((compressed style/compressed) SASS_STYLE_COMPRESSED))
+(include "sass-common-types.scm")
 
 ;; Some convenient string helper function
+(define string-quote
+  (foreign-lambda c-string sass_string_quote c-string char))
 ; char* sass_string_quote (const char *str, const char quote_mark);
+(define string-unquote
+  (foreign-lambda c-string sass_string_unquote c-string))
 ; char* sass_string_unquote (const char *str);
 
 ;; Get compiled libsass version
+(define libsass-version
+  (foreign-lambda c-string libsass_version))
 ; const char* libsass_version(void);
 
 ) ; END MODULE

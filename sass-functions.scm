@@ -18,16 +18,6 @@
 ; struct Sass_Importer;
 ; struct Sass_Function;
 
-;;; Typedef helpers for import lists
-(define-foreign-type import-entry (c-pointer (struct "Sass_Import")))
-; typedef struct Sass_Import (*Sass_Import_Entry);
-(define-foreign-type import-list (c-pointer (c-pointer (struct "Sass_Import"))))
-; typedef struct Sass_Import* (*Sass_Import_List);
-;;; Typedef helpers for custom importer lists
-(define-foreign-type importer-entry (c-pointer (struct "Sass_Importer")))
-; typedef struct Sass_Importer (*Sass_Importer_Entry);
-(define-foreign-type importer-list (c-pointer (c-pointer (struct "Sass_Importer"))))
-; typedef struct Sass_Importer* (*Sass_Importer_List);
 ;;; Typedef defining importer signature and return type
 (define-foreign-type importer-fn
   (function import-list
@@ -35,11 +25,6 @@
 ; typedef Sass_Import_List (*Sass_Importer_Fn)
 ;   (const char* url, Sass_Importer_Entry cb, struct Sass_Compiler* compiler);
 
-;;; Typedef helpers for custom functions lists
-(define-foreign-type function-entry (c-pointer (struct "Sass_Function")))
-; typedef struct Sass_Function (*Sass_Function_Entry);
-(define-foreign-type function-list (c-pointer (c-pointer (struct "Sass_Function"))))
-; typedef struct Sass_Function* (*Sass_Function_List);
 ;;; Typedef defining function signature and return type
 (define-foreign-type function-fn
   (function (c-pointer sass-value)
@@ -59,7 +44,7 @@
                   importer-list
                   size_t))
 ; Sass_Importer_Entry sass_importer_get_list_entry (Sass_Importer_List list, size_t idx);
-(define importer-set-list-entry
+(define importer-set-list-entry!
   (foreign-lambda void
                   sass_importer_set_list_entry
                   importer-list
@@ -125,7 +110,7 @@
                   c-string))
 ; Sass_Import_Entry sass_make_import (const char* path, const char* base, char* source, char* srcmap);
 ;;; set error message to abort import and to print out a message (path from existing object is used in output)
-(define import-set-error
+(define import-set-error!
   (foreign-lambda import-entry
                   sass_import_set_error
                   import-entry
@@ -136,7 +121,7 @@
 
 ;;; Setters to insert an entry into the import list (you may also use [] access directly)
 ;;; Since we are dealing with pointers they should have a guaranteed and fixed size
-(define import-set-list-entry
+(define import-set-list-entry!
   (foreign-lambda void
                   sass_import_set_list_entry
                   import-list
@@ -236,7 +221,7 @@
                   function-list
                   size_t))
 ; Sass_Function_Entry sass_function_get_list_entry(Sass_Function_List list, size_t pos);
-(define function-set-list-entry
+(define function-set-list-entry!
   (foreign-lambda void
                   sass_function_set_list_entry
                   function-list
