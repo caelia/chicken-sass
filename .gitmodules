@@ -4,3 +4,6 @@
 [submodule "sassc"]
 	path = sassc
 	url = https://github.com/sass/sassc
+[submodule "sass-spec"]
+	path = sass-spec
+	url = https://github.com/sass/sass-spec
