@@ -1,11 +1,11 @@
-(compile -O -s sass-values.scm -j sass-values)
-(compile -O -s sass-values.import.scm)
-(compile -O -s sass-functions.scm -j sass-functions)
-(compile -O -s sass-functions.import.scm)
-(compile -O -s sass-context.scm -j sass-context)
-(compile -O -s sass-context.import.scm)
-(compile -O -s sass.scm -j sass)
-(compile -O -s sass.import.scm)
+(compile -O -s -lsass sass-values.scm -j sass-values)
+(compile -O -s -lsass sass-values.import.scm)
+(compile -O -s -lsass sass-functions.scm -j sass-functions)
+(compile -O -s -lsass sass-functions.import.scm)
+(compile -O -s -lsass sass-context.scm -j sass-context)
+(compile -O -s -lsass sass-context.import.scm)
+(compile -O -s -lsass sass.scm -j sass)
+(compile -O -s -lsass sass.import.scm)
 (install-extension
   'sass
   '("sass-values.so" "sass-values.import.so"
