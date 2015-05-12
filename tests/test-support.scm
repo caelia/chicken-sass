@@ -1,6 +1,7 @@
 (use utils)
 
-(define (compare-files file1 file2)
+; Are files equal, excluding whitespace differences?
+(define (file=? file1 file2)
   (let ((normalize-whitespace
          (lambda (str)
            (string-intersperse
