@@ -1,0 +1,1487 @@
+-- testing basic -------------------------------------------------------------
+00_empty ............................................................. [ PASS]
+01_simple_css ........................................................ [ PASS]
+02_simple_nesting .................................................... [ PASS]
+03_simple_variable ................................................... [ PASS]
+04_basic_variables ................................................... [ PASS]
+05_empty_levels ...................................................... [ PASS]
+06_nesting_and_comments .............................................. [ PASS]
+07_nested_simple_selector_groups ..................................... [ PASS]
+08_selector_combinators .............................................. [ PASS]
+09_selector_groups_and_combinators ................................... [ PASS]
+10_classes_and_ids ................................................... [ PASS]
+11_attribute_selectors ............................................... [ PASS]
+13_back_references ................................................... [ PASS]
+14_imports ........................................................... [ PASS]
+15_arithmetic_and_lists .............................................. [ PASS]
+16_hex_arithmetic .................................................... [ PASS]
+17_basic_mixins ...................................................... [ PASS]
+18_mixin_scope ....................................................... [ PASS]
+19_full_mixin_craziness .............................................. [ PASS]
+20_scoped_variables .................................................. [ PASS]
+21_one_builtin_function .............................................. [ PASS]
+22_colors_with_alpha ................................................. [ PASS]
+23_basic_value_interpolation ......................................... [ PASS]
+24_namespace_properties .............................................. [ PASS]
+25_basic_string_interpolation ........................................ [ PASS]
+26_selector_interpolation ............................................ [ PASS]
+27_media_queries ..................................................... [ PASS]
+28_url ............................................................... [ PASS]
+29_if ................................................................ [ PASS]
+30_if_in_function .................................................... [ PASS]
+31_if_in_mixin ....................................................... [ PASS]
+32_percentages ....................................................... [ PASS]
+33_ambiguous_imports ................................................. [ PASS]
+35_varargs_false ..................................................... [ PASS]
+36_extra_commas_in_selectors ......................................... [ PASS]
+37_url_expressions ................................................... [ PASS]
+39_dash_match_attribute_selector ..................................... [ PASS]
+40_pseudo_class_identifier_starting_with_n ........................... [ PASS]
+41_slashy_urls ....................................................... [ PASS]
+42_css_imports ....................................................... [ PASS]
+43_str_length ........................................................ [ PASS]
+44_bem_selectors ..................................................... [ PASS]
+45_str_insert ........................................................ [ PASS]
+46_str_index ......................................................... [ PASS]
+48_case_conversion ................................................... [ PASS]
+49_interpolants_in_css_imports ....................................... [ PASS]
+50_wrapped_pseudo_selectors .......................................... [ PASS]
+51_trailing_commas_in_list ........................................... [ PASS]
+52_interchangeable_hyphens_underscores ............................... [ PASS]
+53_escaped_quotes .................................................... [ PASS]
+54_adjacent_identifiers_with_hyphens ................................. [ PASS]
+55_variable_exists ................................................... [ PASS]
+56_global_variable_exists ............................................ [ PASS]
+57_function_exists ................................................... [ PASS]
+58_mixin_exists ...................................................... [ PASS]
+59_if_expression ..................................................... [ PASS]
+60_call .............................................................. [ PASS]
+57 tests completed in 1.055 seconds.
+57 out of 57 (100%) tests passed.
+-- done testing basic --------------------------------------------------------
+
+
+-- testing colors ------------------------------------------------------------
+adjust-color ......................................................... [ PASS]
+adjust-hue ........................................................... [ PASS]
+basic ................................................................ [ PASS]
+change-color ......................................................... [ PASS]
+complement ........................................................... [ PASS]
+desaturate ........................................................... [ PASS]
+fade-in .............................................................. [ PASS]
+fade-out ............................................................. [ PASS]
+saturate ............................................................. [ PASS]
+saturation ........................................................... [ PASS]
+scale-color .......................................................... [ PASS]
+11 tests completed in 0.194 seconds.
+11 out of 11 (100%) tests passed.
+-- done testing colors -------------------------------------------------------
+
+
+-- testing css ---------------------------------------------------------------
+bizarrely_formatted_comments ......................................... [ PASS]
+blockless_directive_without_semicolon ................................ [ PASS]
+closing_line_comment_end_with_compact_output ......................... [ PASS]
+directive_with_lots_of_whitespace .................................... [ PASS]
+empty_block_directive ................................................ [ PASS]
+ms_long_filter_syntax ................................................ [ PASS]
+multiple_comments .................................................... [ PASS]
+7 tests completed in 0.134 seconds.
+7 out of 7 (100%) tests passed.
+-- done testing css ----------------------------------------------------------
+
+
+-- testing extend-tests ------------------------------------------------------
+001_test_basic ....................................................... [ PASS]
+002_test_basic ....................................................... [ PASS]
+003_test_basic ....................................................... [ PASS]
+004_test_basic ....................................................... [ PASS]
+005_test_multiple_targets ............................................ [ PASS]
+006_test_multiple_extendees .......................................... [ PASS]
+007_test_multiple_extends_with_single_extender_and_single_target ..... [ PASS]
+008_test_multiple_extends_with_single_extender_and_single_target ..... [ PASS]
+009_test_multiple_extends_with_multiple_extenders_and_single_target .. [ PASS]
+010_test_multiple_extends_with_multiple_extenders_and_single_target .. [ PASS]
+011_test_chained_extends ............................................. [ PASS]
+012_test_dynamic_extendee ............................................ [ PASS]
+013_test_dynamic_extendee ............................................ [ PASS]
+014_test_nested_target ............................................... [ PASS]
+015_test_target_with_child ........................................... [ PASS]
+016_test_class_unification ........................................... [ PASS]
+017_test_class_unification ........................................... [ PASS]
+018_test_id_unification .............................................. [ PASS]
+019_test_id_unification .............................................. [ PASS]
+020_test_universal_unification_with_simple_target .................... [ PASS]
+022_test_universal_unification_with_simple_target .................... [ PASS]
+025_test_universal_unification_with_namespaceless_universal_target ... [ PASS]
+034_test_universal_unification_with_namespaceless_element_target ..... [ PASS]
+040_test_universal_unification_with_namespaced_element_target ........ [ PASS]
+043_test_element_unification_with_simple_target ...................... [ PASS]
+044_test_element_unification_with_simple_target ...................... [ PASS]
+045_test_element_unification_with_simple_target ...................... [ PASS]
+046_test_element_unification_with_simple_target ...................... [ PASS]
+047_test_element_unification_with_namespaceless_universal_target ..... [ PASS]
+051_test_element_unification_with_namespaceless_universal_target ..... [ PASS]
+056_test_element_unification_with_namespaceless_element_target ....... [ PASS]
+059_test_element_unification_with_namespaceless_element_target ....... [ PASS]
+064_test_element_unification_with_namespaced_element_target .......... [ PASS]
+065_test_attribute_unification ....................................... [ PASS]
+066_test_attribute_unification ....................................... [ PASS]
+067_test_attribute_unification ....................................... [ PASS]
+068_test_attribute_unification ....................................... [ PASS]
+069_test_attribute_unification ....................................... [ PASS]
+070_test_pseudo_unification .......................................... [ PASS]
+071_test_pseudo_unification .......................................... [ PASS]
+072_test_pseudo_unification .......................................... [ PASS]
+073_test_pseudo_unification .......................................... [ PASS]
+074_test_pseudo_unification .......................................... [ PASS]
+075_test_pseudo_unification .......................................... [ PASS]
+076_test_pseudo_unification .......................................... [ PASS]
+077_test_pseudo_unification .......................................... [ PASS]
+078_test_pseudoelement_remains_at_end_of_selector .................... [ PASS]
+079_test_pseudoelement_remains_at_end_of_selector .................... [ PASS]
+080_test_pseudoclass_remains_at_end_of_selector ...................... [ PASS]
+081_test_pseudoclass_remains_at_end_of_selector ...................... [ PASS]
+082_test_not_remains_at_end_of_selector .............................. [ PASS]
+083_test_pseudoelement_goes_lefter_than_pseudoclass .................. [ PASS]
+084_test_pseudoelement_goes_lefter_than_pseudoclass .................. [ PASS]
+085_test_pseudoelement_goes_lefter_than_not .......................... [ PASS]
+086.1_test_pseudoelement_goes_lefter_than_not ........................ [ PASS]
+086_test_pseudoelement_goes_lefter_than_not .......................... [ PASS]
+087_test_negation_unification ........................................ [ PASS]
+088_test_negation_unification ........................................ [ PASS]
+089_test_negation_unification ........................................ [ PASS]
+090_test_comma_extendee .............................................. [ PASS]
+091_test_redundant_selector_elimination .............................. [ PASS]
+092_test_long_extendee ............................................... [ PASS]
+093_test_long_extendee_matches_supersets ............................. [ PASS]
+095_test_long_extender ............................................... [ PASS]
+097_test_nested_extender ............................................. [ PASS]
+098_test_nested_extender_runs_unification ............................ [ PASS]
+099_test_nested_extender_alternates_parents .......................... [ PASS]
+100_test_nested_extender_unifies_identical_parents ................... [ PASS]
+101_test_nested_extender_unifies_common_substring .................... [ PASS]
+102_test_nested_extender_unifies_common_subseq ....................... [ PASS]
+103_test_nested_extender_chooses_first_subseq ........................ [ PASS]
+
+    -- testing 104_test_nested_extender_counts_extended_subselectors ---------
+    104_test_nested_extender_counts_extended_subselectors ............ [ PASS]
+    1 test completed in 0.021 seconds.
+    1 out of 1 (100%) test passed.
+    -- done testing 104_test_nested_extender_counts_extended_subselectors ----
+
+105_test_nested_extender_counts_extended_superselectors .............. [ PASS]
+106_test_nested_extender_with_child_selector ......................... [ PASS]
+107_test_nested_extender_finds_common_selectors_around_child_selector  [ PASS]
+108_test_nested_extender_finds_common_selectors_around_child_selector  [ PASS]
+109_test_nested_extender_doesnt_find_common_selectors_around_adjacent_sibling_selector  [ PASS]
+110_test_nested_extender_doesnt_find_common_selectors_around_adjacent_sibling_selector  [ PASS]
+111_test_nested_extender_doesnt_find_common_selectors_around_adjacent_sibling_selector  [ PASS]
+112_test_nested_extender_doesnt_find_common_selectors_around_sibling_selector  [ PASS]
+113_test_nested_extender_doesnt_find_common_selectors_around_sibling_selector  [ PASS]
+114_test_nested_extender_doesnt_find_common_selectors_around_sibling_selector  [ PASS]
+118_test_nested_extender_with_early_child_selectors_doesnt_subseq_them  [ PASS]
+119_test_nested_extender_with_early_child_selectors_doesnt_subseq_them  [ PASS]
+120_test_nested_extender_with_child_selector_unifies ................. [ PASS]
+121_test_nested_extender_with_child_selector_unifies ................. [ PASS]
+122_test_nested_extender_with_child_selector_unifies ................. [ PASS]
+123_test_nested_extender_with_early_child_selector ................... [ PASS]
+124_test_nested_extender_with_early_child_selector ................... [ PASS]
+125_test_nested_extender_with_early_child_selector ................... [ PASS]
+126_test_nested_extender_with_early_child_selector ................... [ PASS]
+127_test_nested_extender_with_early_child_selector ................... [ PASS]
+128_test_nested_extender_with_sibling_selector ....................... [ PASS]
+129_test_nested_extender_with_hacky_selector ......................... [ PASS]
+130_test_nested_extender_with_hacky_selector ......................... [ PASS]
+131_test_nested_extender_merges_with_same_selector ................... [ PASS]
+132_test_nested_extender_with_child_selector_merges_with_same_selector  [ PASS]
+133_test_combinator_unification_for_hacky_combinators ................ [ PASS]
+134_test_combinator_unification_for_hacky_combinators ................ [ PASS]
+135_test_combinator_unification_for_hacky_combinators ................ [ PASS]
+136_test_combinator_unification_for_hacky_combinators ................ [ PASS]
+137_test_combinator_unification_for_hacky_combinators ................ [ PASS]
+138_test_combinator_unification_for_hacky_combinators ................ [ PASS]
+139_test_combinator_unification_for_hacky_combinators ................ [ PASS]
+140_test_combinator_unification_double_tilde ......................... [ PASS]
+141_test_combinator_unification_double_tilde ......................... [ PASS]
+142_test_combinator_unification_double_tilde ......................... [ PASS]
+143_test_combinator_unification_double_tilde ......................... [ PASS]
+144_test_combinator_unification_tilde_plus ........................... [ PASS]
+145_test_combinator_unification_tilde_plus ........................... [ PASS]
+146_test_combinator_unification_tilde_plus ........................... [ PASS]
+147_test_combinator_unification_tilde_plus ........................... [ PASS]
+148_test_combinator_unification_tilde_plus ........................... [ PASS]
+149_test_combinator_unification_tilde_plus ........................... [ PASS]
+150_test_combinator_unification_tilde_plus ........................... [ PASS]
+151_test_combinator_unification_tilde_plus ........................... [ PASS]
+152_test_combinator_unification_angle_sibling ........................ [ PASS]
+153_test_combinator_unification_angle_sibling ........................ [ PASS]
+154_test_combinator_unification_angle_sibling ........................ [ PASS]
+155_test_combinator_unification_angle_sibling ........................ [ PASS]
+156_test_combinator_unification_double_angle ......................... [ PASS]
+157_test_combinator_unification_double_angle ......................... [ PASS]
+158_test_combinator_unification_double_angle ......................... [ PASS]
+159_test_combinator_unification_double_angle ......................... [ PASS]
+160_test_combinator_unification_double_plus .......................... [ PASS]
+161_test_combinator_unification_double_plus .......................... [ PASS]
+162_test_combinator_unification_double_plus .......................... [ PASS]
+163_test_combinator_unification_double_plus .......................... [ PASS]
+164_test_combinator_unification_angle_space .......................... [ PASS]
+165_test_combinator_unification_angle_space .......................... [ PASS]
+166_test_combinator_unification_angle_space .......................... [ PASS]
+167_test_combinator_unification_angle_space .......................... [ PASS]
+168_test_combinator_unification_angle_space .......................... [ PASS]
+169_test_combinator_unification_angle_space .......................... [ PASS]
+170_test_combinator_unification_plus_space ........................... [ PASS]
+171_test_combinator_unification_plus_space ........................... [ PASS]
+172_test_combinator_unification_plus_space ........................... [ PASS]
+173_test_combinator_unification_plus_space ........................... [ PASS]
+174_test_combinator_unification_plus_space ........................... [ PASS]
+175_test_combinator_unification_plus_space ........................... [ PASS]
+176_test_combinator_unification_nested ............................... [ PASS]
+177_test_combinator_unification_nested ............................... [ PASS]
+178_test_combinator_unification_with_newlines ........................ [ PASS]
+179_test_extend_self_loop ............................................ [ PASS]
+182_test_nested_extend_loop .......................................... [ PASS]
+183_test_multiple_extender_merges_with_superset_selector ............. [ PASS]
+184_test_control_flow_if ............................................. [ PASS]
+185_test_control_flow_for ............................................ [ PASS]
+186_test_control_flow_while .......................................... [ PASS]
+187_test_basic_placeholder_selector .................................. [ PASS]
+188_test_unused_placeholder_selector ................................. [ PASS]
+189_test_placeholder_descendant_selector ............................. [ PASS]
+190_test_semi_placeholder_selector ................................... [ PASS]
+191_test_placeholder_selector_with_multiple_extenders ................ [ PASS]
+192_test_placeholder_interpolation ................................... [ PASS]
+193_test_media_in_placeholder_selector ............................... [ PASS]
+194_test_extend_within_media ......................................... [ PASS]
+195_test_extend_within_unknown_directive ............................. [ PASS]
+196_test_extend_within_nested_directives ............................. [ PASS]
+197_test_extend_within_disparate_media ............................... [ PASS]
+198_test_extend_within_disparate_unknown_directive ................... [ PASS]
+199_test_extend_within_disparate_nested_directives ................... [ PASS]
+206_test_extend_succeeds_when_one_extension_fails_but_others_dont .... [ PASS]
+207_test_optional_extend_succeeds_when_extendee_doesnt_exist ......... [ PASS]
+208_test_optional_extend_succeeds_when_extension_fails ............... [ PASS]
+209_test_pseudo_element_superselector ................................ [ PASS]
+210_test_pseudo_element_superselector ................................ [ PASS]
+211_test_pseudo_element_superselector ................................ [ PASS]
+212_test_pseudo_element_superselector ................................ [ PASS]
+213_test_pseudo_element_superselector ................................ [ PASS]
+214_test_pseudo_element_superselector ................................ [ PASS]
+215_test_multiple_source_redundancy_elimination ...................... [ PASS]
+216_test_nested_sibling_extend ....................................... [ PASS]
+217_test_parent_and_sibling_extend ................................... [ PASS]
+218_test_nested_extend_specificity ................................... [ PASS]
+219_test_nested_double_extend_optimization ........................... [ PASS]
+220_test_extend_in_double_nested_media_query ......................... [ PASS]
+221_test_partially_failed_extend ..................................... [ PASS]
+222_test_newline_near_combinator ..................................... [ PASS]
+223_test_duplicated_selector_with_newlines ........................... [ PASS]
+224_test_nested_selector_with_child_selector_hack_extendee ........... [ PASS]
+225_test_nested_selector_with_child_selector_hack_extender ........... [ PASS]
+226_test_nested_selector_with_child_selector_hack_extender_and_extendee  [ PASS]
+227_test_nested_selector_with_child_selector_hack_extender_and_sibling_selector_extendee  [ PASS]
+228_test_nested_selector_with_child_selector_hack_extender_and_extendee_and_newline  [ PASS]
+229_test_extended_parent_and_child_redundancy_elimination ............ [ PASS]
+230_test_extend_redundancy_elimination_when_it_would_reduce_specificity  [ PASS]
+231_test_extend_redundancy_elimination_when_it_would_preserve_specificity  [ PASS]
+232_test_extend_redundancy_elimination_never_eliminates_base_selector  [ PASS]
+233_test_extend_cross_branch_redundancy_elimination .................. [ PASS]
+234_test_extend_cross_branch_redundancy_elimination .................. [ PASS]
+does_not_move_page_block_in_media .................................... [ PASS]
+issue_146 ............................................................ [ PASS]
+192 tests and 1 subgroup completed in 3.699 seconds.
+192 out of 192 (100%) tests passed.
+1 out of 1 (100%) subgroup passed.
+-- done testing extend-tests -------------------------------------------------
+
+
+-- testing libsass -----------------------------------------------------------
+arg-eval ............................................................. [ PASS]
+
+    -- testing at-error ------------------------------------------------------
+    feature-test ..................................................... [ PASS]
+    1 test completed in 0.021 seconds.
+    1 out of 1 (100%) test passed.
+    -- done testing at-error -------------------------------------------------
+
+
+    -- testing at-root -------------------------------------------------------
+    135_test_simple_at_root .......................................... [ PASS]
+    136_test_at_root_with_selector ................................... [ PASS]
+    137_test_at_root_in_mixin ........................................ [ PASS]
+    138_test_at_root_in_media ........................................ [ PASS]
+    139_test_at_root_in_bubbled_media ................................ [ PASS]
+    140_test_at_root_in_unknown_directive ............................ [ PASS]
+    141_test_at_root_with_parent_ref ................................. [ PASS]
+    142_test_multi_level_at_root_with_parent_ref ..................... [ PASS]
+    143_test_multi_level_at_root_with_inner_parent_ref ............... [ PASS]
+    ampersand ........................................................ [ PASS]
+    basic ............................................................ [ PASS]
+    extend ........................................................... [ PASS]
+    keyframes ........................................................ [ PASS]
+    media ............................................................ [ PASS]
+    nested ........................................................... [ PASS]
+    with_without ..................................................... [ PASS]
+    16 tests completed in 0.303 seconds.
+    16 out of 16 (100%) tests passed.
+    -- done testing at-root --------------------------------------------------
+
+at-stuff ............................................................. [ PASS]
+
+    -- testing basic ---------------------------------------------------------
+    44_not_number_expression ......................................... [ PASS]
+    1 test completed in 0.019 seconds.
+    1 out of 1 (100%) test passed.
+    -- done testing basic ----------------------------------------------------
+
+bool ................................................................. [ PASS]
+bourbon .............................................................. [ PASS]
+calc ................................................................. [ PASS]
+charset .............................................................. [ PASS]
+color-names .......................................................... [ PASS]
+conversions .......................................................... [ PASS]
+css-import ........................................................... [ PASS]
+css_unicode .......................................................... [ PASS]
+div .................................................................. [ PASS]
+env .................................................................. [ PASS]
+eq ................................................................... [ PASS]
+filter-functions ..................................................... [ PASS]
+http_import .......................................................... [ PASS]
+image-url ............................................................ [ PASS]
+import ............................................................... [ PASS]
+inh .................................................................. [ PASS]
+inheritance .......................................................... [ PASS]
+keyframes ............................................................ [ PASS]
+length ............................................................... [ PASS]
+list-evaluation ...................................................... [ PASS]
+lists ................................................................ [ PASS]
+media ................................................................ [ PASS]
+media-hoisting ....................................................... [ PASS]
+mixin ................................................................ [ PASS]
+mixins-and-media-queries ............................................. [ PASS]
+multi-blocks ......................................................... [ PASS]
+placeholder-mediaquery ............................................... [ PASS]
+placeholder-nested ................................................... [ PASS]
+rel .................................................................. [ PASS]
+scale ................................................................ 
+Warning: error in group outside of tests
+[ PASS]
+
+    -- testing selector-functions --------------------------------------------
+
+Error: (directory) cannot open directory - Not a directory: "test-cases/libsass/selector-functions/is_superselector/_assert_helpers.scss"
+        1 test completed in 0.0 seconds.
+        1 error (100%).
+        0 out of 1 (0%) tests passed.
+        -- done testing is_superselector -------------------------------------
+
+    1 subgroup completed in 0.001 seconds.
+    0 out of 1 (0%) subgroups passed.
+    -- done testing selector-functions ---------------------------------------
+
+selector_interpolation_in_string ..................................... [ PASS]
+selectors ............................................................ [ PASS]
+unary-ops ............................................................ [ PASS]
+unitless ............................................................. [ PASS]
+units ................................................................ [ PASS]
+unquote .............................................................. [ PASS]
+url .................................................................. [ PASS]
+var-args ............................................................. [ FAIL]
+    expected "test-cases/libsass/var-args/expected_output.css" but got "test-cases/libsass/var-args/test_output.css"
+    outfile
+
+    -- testing variable-scoping ----------------------------------------------
+    defaults ......................................................... [ PASS]
+    defaults-global .................................................. [ PASS]
+    defaults-global-null ............................................. [ PASS]
+    defaults-null .................................................... [ PASS]
+    feature-test ..................................................... [ PASS]
+    lexical-scope .................................................... [ PASS]
+    root-scope ....................................................... [ PASS]
+    7 tests completed in 0.121 seconds.
+    7 out of 7 (100%) tests passed.
+    -- done testing variable-scoping -----------------------------------------
+
+variables_in_media ................................................... [ PASS]
+41 tests and 5 subgroups completed in 1.261 seconds.
+1 failure (2.4%).
+40 out of 41 (97.6%) tests passed.
+4 out of 5 (80.0%) subgroups passed.
+-- done testing libsass ------------------------------------------------------
+
+
+-- testing libsass-closed-issues ---------------------------------------------
+issue_1007 ........................................................... [ PASS]
+issue_1016 ........................................................... [ FAIL]
+    expected "test-cases/libsass-closed-issues/issue_1016/expected_output.css" but got "test-cases/libsass-closed-issues/issue_1016/test_output.css"
+    outfile
+issue_1025 ........................................................... [ PASS]
+issue_1030 ........................................................... [ PASS]
+issue_1036 ........................................................... [ PASS]
+issue_1060 ........................................................... [ PASS]
+issue_1074 ........................................................... [ PASS]
+issue_1075 ........................................................... [ PASS]
+issue_1080 ........................................................... [ PASS]
+issue_1081 ........................................................... [ PASS]
+issue_1082 ........................................................... [ PASS]
+issue_1087 ........................................................... [ PASS]
+issue_1092 ........................................................... [ FAIL]
+    expected "test-cases/libsass-closed-issues/issue_1092/expected_output.css" but got "test-cases/libsass-closed-issues/issue_1092/test_output.css"
+    outfile
+issue_1098 ........................................................... [ PASS]
+issue_1103 ........................................................... [ PASS]
+issue_1106 ........................................................... [ PASS]
+issue_1121 ........................................................... [ PASS]
+issue_1124 ........................................................... [ PASS]
+issue_1127 ........................................................... [ PASS]
+issue_113 ............................................................ [ PASS]
+issue_1130 ........................................................... [ PASS]
+issue_1132 ........................................................... [ PASS]
+
+    -- testing issue_1133 ----------------------------------------------------
+    normal ........................................................... [ PASS]
+    vararg ........................................................... [ PASS]
+    2 tests completed in 0.036 seconds.
+    2 out of 2 (100%) tests passed.
+    -- done testing issue_1133 -----------------------------------------------
+
+issue_1153 ........................................................... [ PASS]
+
+Error: Error: Incompatible units: 'em' and 'px*em/px'.
+        on line 2 of test-cases/libsass-closed-issues/issue_1163/input.scss
+>>   content: (((92px * 12) / 13px) * 1em) + 22em;
+   --------------^
+
+
+	Call history:
+
+	csass.scm:51: sass-context#make-file-context	  
+	sass-context.scm:46: ##sys#make-c-string	  
+	csass.scm:52: sass-context#file-context-get-context	  
+	csass.scm:54: sass-context#option-set-output-path!	  
+	sass-context.scm:205: ##sys#make-c-string	  
+	csass.scm:55: sass-context#option-set-input-path!	  
+	sass-context.scm:202: ##sys#make-c-string	  
+	csass.scm:56: sass-context#file-context-set-options!	  
+	csass.scm:58: sass-context#compile-file-context	  
+	csass.scm:60: sass-context#context-get-error-status	  
+	csass.scm:61: sass-context#context-get-error-message	  
+	sass-context.scm:244: ##sys#peek-c-string	  
+	csass.scm:62: sass-context#context-get-output-string	  
+	sass-context.scm:232: ##sys#peek-c-string	  
+	csass.scm:60: output	  
+	csass.scm:24: error	  	<--
+issue_1163 ........................................................... [ERROR]
+    
+Error: (open-input-file) cannot open file - No such file or directory: "test-cases/libsass-closed-issues/issue_1163/test_output.css"
+    outfile
+
+Error: Error: Incompatible units: 'ms' and 's'.
+        on line 2 of test-cases/libsass-closed-issues/issue_1167/input.scss
+>>   b: 3s + 101ms;
+   -----^
+
+
+	Call history:
+
+	csass.scm:51: sass-context#make-file-context	  
+	sass-context.scm:46: ##sys#make-c-string	  
+	csass.scm:52: sass-context#file-context-get-context	  
+	csass.scm:54: sass-context#option-set-output-path!	  
+	sass-context.scm:205: ##sys#make-c-string	  
+	csass.scm:55: sass-context#option-set-input-path!	  
+	sass-context.scm:202: ##sys#make-c-string	  
+	csass.scm:56: sass-context#file-context-set-options!	  
+	csass.scm:58: sass-context#compile-file-context	  
+	csass.scm:60: sass-context#context-get-error-status	  
+	csass.scm:61: sass-context#context-get-error-message	  
+	sass-context.scm:244: ##sys#peek-c-string	  
+	csass.scm:62: sass-context#context-get-output-string	  
+	sass-context.scm:232: ##sys#peek-c-string	  
+	csass.scm:60: output	  
+	csass.scm:24: error	  	<--
+issue_1167 ........................................................... [ERROR]
+    
+Error: (open-input-file) cannot open file - No such file or directory: "test-cases/libsass-closed-issues/issue_1167/test_output.css"
+    outfile
+
+Error: Error: invalid selector after .test-1
+        on line 2 of test-cases/libsass-closed-issues/issue_1168/input.scss
+>> 
+   -----------^
+
+
+	Call history:
+
+	csass.scm:51: sass-context#make-file-context	  
+	sass-context.scm:46: ##sys#make-c-string	  
+	csass.scm:52: sass-context#file-context-get-context	  
+	csass.scm:54: sass-context#option-set-output-path!	  
+	sass-context.scm:205: ##sys#make-c-string	  
+	csass.scm:55: sass-context#option-set-input-path!	  
+	sass-context.scm:202: ##sys#make-c-string	  
+	csass.scm:56: sass-context#file-context-set-options!	  
+	csass.scm:58: sass-context#compile-file-context	  
+	csass.scm:60: sass-context#context-get-error-status	  
+	csass.scm:61: sass-context#context-get-error-message	  
+	sass-context.scm:244: ##sys#peek-c-string	  
+	csass.scm:62: sass-context#context-get-output-string	  
+	sass-context.scm:232: ##sys#peek-c-string	  
+	csass.scm:60: output	  
+	csass.scm:24: error	  	<--
+issue_1168 ........................................................... [ERROR]
+    
+Error: (open-input-file) cannot open file - No such file or directory: "test-cases/libsass-closed-issues/issue_1168/test_output.css"
+    outfile
+issue_1178 ........................................................... [ FAIL]
+    expected "test-cases/libsass-closed-issues/issue_1178/expected_output.css" but got "test-cases/libsass-closed-issues/issue_1178/test_output.css"
+    outfile
+issue_1192 ........................................................... [ FAIL]
+    expected "test-cases/libsass-closed-issues/issue_1192/expected_output.css" but got "test-cases/libsass-closed-issues/issue_1192/test_output.css"
+    outfile
+issue_137 ............................................................ [ PASS]
+issue_143 ............................................................ [ PASS]
+issue_151 ............................................................ [ PASS]
+issue_152 ............................................................ [ PASS]
+
+    -- testing issue_185 -----------------------------------------------------
+    hoisting ......................................................... [ PASS]
+    media_level_4 .................................................... [ PASS]
+    media_wrapper_selector ........................................... [ PASS]
+    merge_no_repeat .................................................. [ PASS]
+    mixin ............................................................ [ PASS]
+    selector_wrapper_media ........................................... [ PASS]
+    6 tests completed in 0.106 seconds.
+    6 out of 6 (100%) tests passed.
+    -- done testing issue_185 ------------------------------------------------
+
+issue_224 ............................................................ [ PASS]
+issue_261 ............................................................ [ PASS]
+issue_279 ............................................................ [ PASS]
+issue_308 ............................................................ [ PASS]
+issue_338 ............................................................ [ PASS]
+issue_344 ............................................................ [ PASS]
+issue_346 ............................................................ [ PASS]
+issue_349 ............................................................ [ PASS]
+issue_361 ............................................................ [ PASS]
+issue_368 ............................................................ [ PASS]
+issue_394 ............................................................ [ PASS]
+issue_452 ............................................................ [ PASS]
+issue_453 ............................................................ [ PASS]
+issue_456 ............................................................ [ PASS]
+issue_469 ............................................................ [ PASS]
+issue_472 ............................................................ [ PASS]
+issue_478 ............................................................ [ PASS]
+issue_485 ............................................................ [ PASS]
+issue_487 ............................................................ [ PASS]
+issue_492 ............................................................ [ PASS]
+issue_495 ............................................................ [ PASS]
+issue_502 ............................................................ [ PASS]
+issue_506 ............................................................ [ PASS]
+issue_509 ............................................................ [ PASS]
+issue_510 ............................................................ [ PASS]
+issue_512 ............................................................ [ PASS]
+issue_534 ............................................................ [ PASS]
+issue_535 ............................................................ [ PASS]
+issue_548 ............................................................ [ PASS]
+issue_549 ............................................................ [ PASS]
+
+    -- testing issue_550 -----------------------------------------------------
+
+        -- testing literal ---------------------------------------------------
+        dimension .................................................... [ PASS]
+        number ....................................................... [ PASS]
+        percent ...................................................... [ PASS]
+        3 tests completed in 0.06 seconds.
+        3 out of 3 (100%) tests passed.
+        -- done testing literal ----------------------------------------------
+
+    operator ......................................................... [ PASS]
+
+        -- testing variable --------------------------------------------------
+        dimension .................................................... [ PASS]
+        number ....................................................... [ PASS]
+        percent ...................................................... [ PASS]
+        3 tests completed in 0.06 seconds.
+        3 out of 3 (100%) tests passed.
+        -- done testing variable ---------------------------------------------
+
+    1 test and 2 subgroups completed in 0.139 seconds.
+    1 out of 1 (100%) test passed.
+    2 out of 2 (100%) subgroups passed.
+    -- done testing issue_550 ------------------------------------------------
+
+issue_552 ............................................................ [ PASS]
+issue_553 ............................................................ [ PASS]
+issue_555 ............................................................ [ PASS]
+issue_556 ............................................................ [ PASS]
+issue_557 ............................................................ [ PASS]
+issue_574 ............................................................ [ PASS]
+issue_575 ............................................................ [ PASS]
+issue_577 ............................................................ [ PASS]
+issue_578 ............................................................ [ PASS]
+issue_579 ............................................................ [ PASS]
+issue_590 ............................................................ [ PASS]
+issue_592 ............................................................ [ PASS]
+issue_595 ............................................................ [ PASS]
+issue_602 ............................................................ [ PASS]
+issue_610 ............................................................ [ PASS]
+issue_613 ............................................................ [ PASS]
+issue_614 ............................................................ [ PASS]
+issue_615 ............................................................ [ PASS]
+issue_617 ............................................................ [ PASS]
+issue_622 ............................................................ [ PASS]
+issue_623 ............................................................ [ PASS]
+issue_636 ............................................................ [ PASS]
+issue_639 ............................................................ [ PASS]
+issue_641 ............................................................ [ PASS]
+issue_643 ............................................................ [ PASS]
+issue_644 ............................................................ [ PASS]
+issue_646 ............................................................ [ PASS]
+issue_652 ............................................................ [ PASS]
+
+    -- testing issue_657 -----------------------------------------------------
+    default .......................................................... [ PASS]
+    limit ............................................................ [ PASS]
+    2 tests completed in 1.602 seconds.
+    2 out of 2 (100%) tests passed.
+    -- done testing issue_657 ------------------------------------------------
+
+
+    -- testing issue_659 -----------------------------------------------------
+    issue_659 ........................................................ [ PASS]
+    sass-script ...................................................... [ PASS]
+    static ........................................................... [ PASS]
+    3 tests completed in 0.057 seconds.
+    3 out of 3 (100%) tests passed.
+    -- done testing issue_659 ------------------------------------------------
+
+issue_660 ............................................................ [ PASS]
+
+    -- testing issue_666 -----------------------------------------------------
+    angle ............................................................ [ PASS]
+    length ........................................................... [ PASS]
+    2 tests completed in 0.042 seconds.
+    2 out of 2 (100%) tests passed.
+    -- done testing issue_666 ------------------------------------------------
+
+issue_672 ............................................................ [ PASS]
+issue_683 ............................................................ [ PASS]
+issue_688 ............................................................ [ PASS]
+issue_694 ............................................................ [ PASS]
+issue_699 ............................................................ [ PASS]
+issue_700 ............................................................ [ PASS]
+issue_701 ............................................................ [ PASS]
+issue_702 ............................................................ [ PASS]
+issue_703 ............................................................ [ PASS]
+issue_708 ............................................................ [ PASS]
+issue_733 ............................................................ [ PASS]
+issue_736 ............................................................ [ PASS]
+issue_738 ............................................................ [ PASS]
+issue_740 ............................................................ [ PASS]
+issue_748 ............................................................ [ PASS]
+issue_759 ............................................................ [ PASS]
+issue_760 ............................................................ [ PASS]
+issue_763 ............................................................ [ PASS]
+issue_783 ............................................................ [ PASS]
+issue_784 ............................................................ [ PASS]
+issue_803 ............................................................ [ PASS]
+issue_813 ............................................................ [ PASS]
+issue_815 ............................................................ [ PASS]
+issue_817 ............................................................ [ PASS]
+issue_820 ............................................................ [ PASS]
+issue_828 ............................................................ [ PASS]
+issue_829 ............................................................ [ PASS]
+issue_857 ............................................................ [ PASS]
+issue_859 ............................................................ [ PASS]
+issue_864 ............................................................ [ PASS]
+issue_870 ............................................................ [ PASS]
+issue_873 ............................................................ [ PASS]
+issue_877 ............................................................ [ PASS]
+issue_883 ............................................................ [ PASS]
+issue_884 ............................................................ [ PASS]
+issue_890 ............................................................ [ PASS]
+issue_893 ............................................................ [ PASS]
+issue_894 ............................................................ [ PASS]
+issue_930 ............................................................ [ PASS]
+issue_942 ............................................................ [ PASS]
+issue_943 ............................................................ [ PASS]
+issue_947 ............................................................ [ PASS]
+issue_950 ............................................................ [ PASS]
+issue_976 ............................................................ [ PASS]
+issue_978 ............................................................ [ FAIL]
+    expected "test-cases/libsass-closed-issues/issue_978/expected_output.css" but got "test-cases/libsass-closed-issues/issue_978/test_output.css"
+    outfile
+issue_980 ............................................................ [ PASS]
+issue_988 ............................................................ [ PASS]
+issue_992 ............................................................ [ PASS]
+139 tests and 6 subgroups completed in 4.752 seconds.
+5 failures (3.6%).
+3 errors (2.2%).
+131 out of 139 (94.2%) tests passed.
+6 out of 6 (100%) subgroups passed.
+-- done testing libsass-closed-issues ----------------------------------------
+
+
+-- testing maps --------------------------------------------------------------
+map-get .............................................................. [ PASS]
+map-has-key .......................................................... [ PASS]
+map-keys ............................................................. [ PASS]
+map-merge ............................................................ [ PASS]
+map-remove ........................................................... [ PASS]
+map-values ........................................................... [ PASS]
+6 tests completed in 0.109 seconds.
+6 out of 6 (100%) tests passed.
+-- done testing maps ---------------------------------------------------------
+
+
+-- testing misc --------------------------------------------------------------
+JMA-pseudo-test ...................................................... [ PASS]
+directive_interpolation .............................................. [ PASS]
+empty_content ........................................................ [ PASS]
+import_with_interpolation ............................................ [ PASS]
+lang-bug ............................................................. [ PASS]
+media_interpolation .................................................. [ PASS]
+mixin_content ........................................................ [ PASS]
+namespace_properties_with_script_value ............................... [ PASS]
+negative_numbers ..................................................... [ PASS]
+selector_interpolation_before_element_name ........................... [ PASS]
+selector_only_interpolation .......................................... [ PASS]
+trailing_comma_in_selector ........................................... [ PASS]
+unicode_variables .................................................... [ PASS]
+13 tests completed in 0.248 seconds.
+13 out of 13 (100%) tests passed.
+-- done testing misc ---------------------------------------------------------
+
+
+-- testing number-functions --------------------------------------------------
+abs .................................................................. [ PASS]
+ceil ................................................................. [ PASS]
+floor ................................................................ [ PASS]
+max .................................................................. [ PASS]
+min .................................................................. [ PASS]
+percentage ........................................................... [ PASS]
+random ............................................................... [ PASS]
+round ................................................................ [ PASS]
+8 tests completed in 0.14 seconds.
+8 out of 8 (100%) tests passed.
+-- done testing number-functions ---------------------------------------------
+
+
+-- testing parser ------------------------------------------------------------
+
+    -- testing interpolate ---------------------------------------------------
+
+        -- testing 00_concatenation ------------------------------------------
+        spaced ....................................................... [ PASS]
+        unspaced ..................................................... [ FAIL]
+            expected "test-cases/parser/interpolate/00_concatenation/unspaced/expected_output.css" but got "test-cases/parser/interpolate/00_concatenation/unspaced/test_output.css"
+            outfile
+        2 tests completed in 0.047 seconds.
+        1 failure (50.0%).
+        1 out of 2 (50.0%) test passed.
+        -- done testing 00_concatenation -------------------------------------
+
+
+        -- testing 01_literal ------------------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.121 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 01_literal -------------------------------------------
+
+
+        -- testing 02_double_quoted ------------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.121 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 02_double_quoted -------------------------------------
+
+
+        -- testing 03_single_quoted ------------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.119 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 03_single_quoted -------------------------------------
+
+
+        -- testing 04_space_list_quoted --------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.122 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 04_space_list_quoted ---------------------------------
+
+
+        -- testing 05_comma_list_quoted --------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.109 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 05_comma_list_quoted ---------------------------------
+
+
+        -- testing 06_space_list_complex -------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.108 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 06_space_list_complex --------------------------------
+
+
+        -- testing 07_comma_list_complex -------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.124 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 07_comma_list_complex --------------------------------
+
+
+        -- testing 10_escaped_backslash --------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.118 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 10_escaped_backslash ---------------------------------
+
+
+        -- testing 11_escaped_literal ----------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.119 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 11_escaped_literal -----------------------------------
+
+
+        -- testing 12_escaped_double_quoted ----------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.109 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 12_escaped_double_quoted -----------------------------
+
+
+        -- testing 13_escaped_single_quoted ----------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.124 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 13_escaped_single_quoted -----------------------------
+
+
+        -- testing 14_escapes_literal_numbers --------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.092 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 14_escapes_literal_numbers ---------------------------
+
+
+        -- testing 15_escapes_double_quoted_numbers --------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.115 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 15_escapes_double_quoted_numbers ---------------------
+
+
+        -- testing 16_escapes_single_quoted_numbers --------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.118 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 16_escapes_single_quoted_numbers ---------------------
+
+
+        -- testing 17_escapes_literal_lowercase ------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.11 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 17_escapes_literal_lowercase -------------------------
+
+
+        -- testing 18_escapes_double_quoted_lowercase ------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.107 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 18_escapes_double_quoted_lowercase -------------------
+
+
+        -- testing 19_escapes_single_quoted_lowercase ------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.113 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 19_escapes_single_quoted_lowercase -------------------
+
+
+        -- testing 20_escapes_literal_uppercase ------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.121 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 20_escapes_literal_uppercase -------------------------
+
+
+        -- testing 21_escapes_double_quoted_uppercase ------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.109 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 21_escapes_double_quoted_uppercase -------------------
+
+
+        -- testing 22_escapes_single_quoted_uppercase ------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.11 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 22_escapes_single_quoted_uppercase -------------------
+
+
+        -- testing 23_escapes_literal_specials -------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.12 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 23_escapes_literal_specials --------------------------
+
+
+        -- testing 24_escapes_double_quoted_specials -------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.116 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 24_escapes_double_quoted_specials --------------------
+
+
+        -- testing 25_escapes_single_quoted_specials -------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.113 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 25_escapes_single_quoted_specials --------------------
+
+
+        -- testing 26_escaped_literal_quotes ---------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.12 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 26_escaped_literal_quotes ----------------------------
+
+
+        -- testing 27_escaped_double_quotes ----------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.121 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 27_escaped_double_quotes -----------------------------
+
+
+        -- testing 28_escaped_single_quotes ----------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        06_escape_interpolation ...................................... [ PASS]
+        6 tests completed in 0.12 seconds.
+        6 out of 6 (100%) tests passed.
+        -- done testing 28_escaped_single_quotes -----------------------------
+
+
+        -- testing 29_binary_operation ---------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+
+            -- testing todo --------------------------------------------------
+            06_escape_interpolation .................................. [ FAIL]
+                expected "test-cases/parser/interpolate/29_binary_operation/todo/06_escape_interpolation/expected_output.css" but got "test-cases/parser/interpolate/29_binary_operation/todo/06_escape_interpolation/test_output.css"
+                outfile
+            1 test completed in 0.019 seconds.
+            1 failure (100%).
+            0 out of 1 (0%) tests passed.
+            -- done testing todo ---------------------------------------------
+
+        5 tests and 1 subgroup completed in 0.12 seconds.
+        5 out of 5 (100%) tests passed.
+        0 out of 1 (0%) subgroups passed.
+        -- done testing 29_binary_operation ----------------------------------
+
+
+        -- testing 30_base_test ----------------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+
+            -- testing todo --------------------------------------------------
+            06_escape_interpolation .................................. [ FAIL]
+                expected "test-cases/parser/interpolate/30_base_test/todo/06_escape_interpolation/expected_output.css" but got "test-cases/parser/interpolate/30_base_test/todo/06_escape_interpolation/test_output.css"
+                outfile
+            1 test completed in 0.017 seconds.
+            1 failure (100%).
+            0 out of 1 (0%) tests passed.
+            -- done testing todo ---------------------------------------------
+
+        5 tests and 1 subgroup completed in 0.113 seconds.
+        5 out of 5 (100%) tests passed.
+        0 out of 1 (0%) subgroups passed.
+        -- done testing 30_base_test -----------------------------------------
+
+
+        -- testing 31_schema_simple ------------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        5 tests completed in 0.087 seconds.
+        5 out of 5 (100%) tests passed.
+        -- done testing 31_schema_simple -------------------------------------
+
+
+        -- testing 32_comma_list ---------------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        5 tests completed in 0.096 seconds.
+        5 out of 5 (100%) tests passed.
+        -- done testing 32_comma_list ----------------------------------------
+
+
+        -- testing 33_space_list ---------------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... [ PASS]
+        5 tests completed in 0.094 seconds.
+        5 out of 5 (100%) tests passed.
+        -- done testing 33_space_list ----------------------------------------
+
+
+        -- testing 34_mixed_list ---------------------------------------------
+        01_inline .................................................... [ PASS]
+        02_variable .................................................. [ PASS]
+        03_inline_double ............................................. [ PASS]
+        04_variable_double ........................................... [ PASS]
+        05_variable_quoted_double .................................... 
+Warning: error in group outside of tests
+[ PASS]
+        5 tests completed in 0.086 seconds.
+        5 out of 5 (100%) tests passed.
+        -- done testing 34_mixed_list ----------------------------------------
+
+
+Error: (directory) cannot open directory - Not a directory: "test-cases/parser/interpolate/interpolate.pl"
+    1 test and 33 subgroups completed in 3.646 seconds.
+    1 error (100%).
+    0 out of 1 (0%) tests passed.
+    30 out of 33 (90.9%) subgroups passed.
+    -- done testing interpolate ----------------------------------------------
+
+1 subgroup completed in 3.646 seconds.
+0 out of 1 (0%) subgroups passed.
+-- done testing parser -------------------------------------------------------
+
+
+-- testing scope -------------------------------------------------------------
+clash ................................................................ [ PASS]
+each ................................................................. [ PASS]
+for .................................................................. [ PASS]
+function ............................................................. [ PASS]
+if ................................................................... [ PASS]
+mixin ................................................................ [ PASS]
+nested ............................................................... [ PASS]
+root ................................................................. [ PASS]
+ruleset .............................................................. [ PASS]
+while ................................................................ [ PASS]
+10 tests completed in 0.194 seconds.
+10 out of 10 (100%) tests passed.
+-- done testing scope --------------------------------------------------------
+
+
+-- testing scss --------------------------------------------------------------
+almost_ambiguous_nested_rules_and_declarations ....................... [ PASS]
+alpha ................................................................ [ PASS]
+append ............................................................... [ PASS]
+arglist .............................................................. [ PASS]
+backrefs-in-selector-groups .......................................... [ PASS]
+backslash ............................................................ [ PASS]
+basic_function ....................................................... [ PASS]
+basic_mixins ......................................................... [ PASS]
+basic_prop_name_interpolation ........................................ [ PASS]
+basic_selector_interpolation ......................................... [ PASS]
+blimp ................................................................ [ PASS]
+block_comment_in_script .............................................. [ PASS]
+cfunc ................................................................ [ PASS]
+classes-and-ids ...................................................... [ PASS]
+color_output ......................................................... [ PASS]
+comment_after_if_directive ........................................... [ PASS]
+comparable ........................................................... [ PASS]
+composed-args ........................................................ [ PASS]
+concat ............................................................... [ PASS]
+cons-up .............................................................. [ PASS]
+css_basic_scss ....................................................... [ PASS]
+css_block_directive_with_semicolon ................................... [ PASS]
+css_cdo_and_cdc_ignored_at_toplevel .................................. [ PASS]
+css_crazy_comments ................................................... [ PASS]
+css_empty_declarations ............................................... [ PASS]
+css_empty_rule ....................................................... [ PASS]
+css_import_directive ................................................. [ PASS]
+css_invisible_comments ............................................... [ PASS]
+css_property_comments ................................................ [ PASS]
+css_rule_comments .................................................... [ PASS]
+css_selector_comments ................................................ [ PASS]
+css_selector_hacks ................................................... [ PASS]
+css_spaceless_combo_selectors ........................................ [ PASS]
+css_unary_ops ........................................................ [ PASS]
+default-args ......................................................... [ PASS]
+default-parameters ................................................... [ PASS]
+default-vars-in-default-params ....................................... [ PASS]
+directives-in-propsets ............................................... [ PASS]
+each ................................................................. [ PASS]
+each_directive ....................................................... [ PASS]
+each_in_functions .................................................... [ PASS]
+for .................................................................. [ PASS]
+for_directive ........................................................ [ PASS]
+for_in_functions ..................................................... [ PASS]
+function-names ....................................................... [ PASS]
+function_args ........................................................ [ PASS]
+functions ............................................................ [ PASS]
+functions-and-mixins ................................................. [ PASS]
+guard_assign ......................................................... [ PASS]
+hey1 ................................................................. [ PASS]
+hey2 ................................................................. [ PASS]
+huge ................................................................. [ PASS]
+hyphen-interpolated .................................................. [ PASS]
+ie-backslash ......................................................... [ PASS]
+ie-functions ......................................................... [ PASS]
+ie-hex-str ........................................................... [ PASS]
+if ................................................................... [ PASS]
+if-in-mixin .......................................................... [ PASS]
+if-in-propset ........................................................ [ PASS]
+if_directive ......................................................... [ PASS]
+imp .................................................................. [ PASS]
+important ............................................................ [ PASS]
+important-in-arglist ................................................. [ PASS]
+index ................................................................ [ PASS]
+interpolated-selectors ............................................... [ PASS]
+interpolated-strings ................................................. [ PASS]
+interpolation ........................................................ [ PASS]
+interpolation_with_bracket_on_next_line .............................. [ PASS]
+keyword_args_in_functions ............................................ [ PASS]
+lang ................................................................. [ PASS]
+line_comment_in_script ............................................... [ PASS]
+long-selector ........................................................ [ PASS]
+media-with-interpolation ............................................. [ PASS]
+media2 ............................................................... [ PASS]
+mix .................................................................. [ PASS]
+mixin-content ........................................................ [ PASS]
+mixin-content-selectors .............................................. [ PASS]
+mixin-content-with-no-block .......................................... [ PASS]
+mixin_with_keyword_args .............................................. [ PASS]
+mixins_with_args ..................................................... [ PASS]
+mixins_with_empty_args ............................................... [ PASS]
+multiline-var ........................................................ [ PASS]
+multiline_var ........................................................ [ PASS]
+namespace_properties ................................................. [ PASS]
+namespace_properties_with_value ...................................... [ PASS]
+negation ............................................................. [ PASS]
+nested-extend ........................................................ [ PASS]
+nested_namespace_properties .......................................... [ PASS]
+nested_rules ......................................................... [ PASS]
+nested_rules_with_declarations ....................................... [ PASS]
+nested_rules_with_fancy_selectors .................................... [ PASS]
+newlines_in_selectors ................................................ [ PASS]
+no_namespace_properties_without_space ................................ [ PASS]
+null ................................................................. [ PASS]
+numbers .............................................................. [ PASS]
+one_line_comments .................................................... [ PASS]
+parent_selectors ..................................................... [ PASS]
+passing_all_as_keyword_args_in_opposite_order ........................ [ PASS]
+passing_required_args_as_a_keyword_arg ............................... [ PASS]
+percentages .......................................................... [ PASS]
+placeholder .......................................................... [ PASS]
+placeholder-with-media ............................................... [ PASS]
+precision ............................................................ [ PASS]
+prop_name_interpolation_after_hyphen ................................. [ PASS]
+prop_name_only_interpolation ......................................... [ PASS]
+property_interpolation_at_dashes ..................................... [ PASS]
+quotes-in-interpolated-strings ....................................... [ PASS]
+retina-image ......................................................... [ PASS]
+sass_script .......................................................... [ PASS]
+selector_interpolation_at_attr_beginning ............................. [ PASS]
+selector_interpolation_at_class_begininng ............................ [ PASS]
+selector_interpolation_at_id_begininng ............................... [ PASS]
+selector_interpolation_at_pseudo_begininng ........................... [ PASS]
+selector_interpolation_in_pseudoclass ................................ [ PASS]
+several_namespace_properties ......................................... [ PASS]
+simple-inheritance ................................................... [ PASS]
+simple-lists ......................................................... [ PASS]
+star_plus_and_parent ................................................. [ PASS]
+strings .............................................................. [ PASS]
+url_import ........................................................... [ PASS]
+variables ............................................................ [ PASS]
+vars ................................................................. [ PASS]
+weird-selectors ...................................................... [ PASS]
+weird_added_space .................................................... [ PASS]
+while ................................................................ [ PASS]
+while_directive ...................................................... [ PASS]
+while_in_functions ................................................... [ PASS]
+127 tests completed in 3.93 seconds.
+127 out of 127 (100%) tests passed.
+-- done testing scss ---------------------------------------------------------
+
+
+-- testing scss-tests --------------------------------------------------------
+001_test_one_line_comments ........................................... [ PASS]
+002_test_one_line_comments ........................................... [ PASS]
+003_test_variables ................................................... [ PASS]
+004_test_variables ................................................... [ PASS]
+005_test_unicode_variables ........................................... [ PASS]
+006_test_guard_assign ................................................ [ PASS]
+007_test_guard_assign ................................................ [ PASS]
+008_test_sass_script ................................................. [ PASS]
+009_test_for_directive ............................................... [ PASS]
+010_test_for_directive ............................................... [ PASS]
+011_test_if_directive ................................................ [ PASS]
+012_test_if_directive ................................................ [ PASS]
+013_test_if_directive ................................................ [ PASS]
+014_test_comment_after_if_directive .................................. [ PASS]
+015_test_comment_after_if_directive .................................. [ PASS]
+017_test_each_directive .............................................. [ PASS]
+019_test_css_import_directive ........................................ [ PASS]
+020_test_css_import_directive ........................................ [ PASS]
+021_test_css_import_directive ........................................ [ PASS]
+022_test_css_import_directive ........................................ [ PASS]
+023_test_css_import_directive ........................................ [ PASS]
+027_test_protocol_relative_import .................................... [ PASS]
+028_test_import_with_interpolation ................................... [ PASS]
+029_test_url_import .................................................. [ PASS]
+030_test_block_comment_in_script ..................................... [ PASS]
+031_test_line_comment_in_script ...................................... [ PASS]
+032_test_nested_rules ................................................ [ PASS]
+033_test_nested_rules ................................................ [ PASS]
+034_test_nested_rules ................................................ [ PASS]
+035_test_nested_rules_with_declarations .............................. [ PASS]
+036_test_nested_rules_with_declarations .............................. [ PASS]
+037_test_nested_rules_with_declarations .............................. [ PASS]
+038_test_nested_rules_with_fancy_selectors ........................... [ PASS]
+039_test_almost_ambiguous_nested_rules_and_declarations .............. [ PASS]
+040_test_newlines_in_selectors ....................................... [ PASS]
+041_test_newlines_in_selectors ....................................... [ PASS]
+042_test_newlines_in_selectors ....................................... [ PASS]
+043_test_newlines_in_selectors ....................................... [ PASS]
+044_test_trailing_comma_in_selector .................................. [ PASS]
+045_test_parent_selectors ............................................ [ PASS]
+047_test_unknown_directive_bubbling .................................. [ PASS]
+048_test_namespace_properties ........................................ [ PASS]
+049_test_several_namespace_properties ................................ [ PASS]
+050_test_nested_namespace_properties ................................. [ PASS]
+051_test_namespace_properties_with_value ............................. [ PASS]
+052_test_namespace_properties_with_script_value ...................... [ PASS]
+053_test_no_namespace_properties_without_space ....................... [ PASS]
+054_test_basic_mixins ................................................ [ PASS]
+055_test_basic_mixins ................................................ [ PASS]
+056_test_basic_mixins ................................................ [ PASS]
+057_test_mixins_with_empty_args ...................................... [ PASS]
+058_test_mixins_with_empty_args ...................................... [ PASS]
+059_test_mixins_with_empty_args ...................................... [ PASS]
+060_test_mixins_with_args ............................................ [ PASS]
+061_test_mixins_with_args ............................................ [ PASS]
+062_test_basic_function .............................................. [ PASS]
+063_test_function_args ............................................... [ PASS]
+064_test_mixin_var_args .............................................. [ PASS]
+065_test_mixin_empty_var_args ........................................ [ PASS]
+066_test_mixin_var_args_act_like_list ................................ [ PASS]
+067_test_mixin_splat_args ............................................ [ PASS]
+068_test_mixin_splat_expression ...................................... [ PASS]
+069_test_mixin_splat_args_with_var_args .............................. [ PASS]
+070_test_mixin_splat_args_with_var_args_and_normal_args .............. [ PASS]
+071_test_mixin_splat_args_with_var_args_preserves_separator .......... [ FAIL]
+    expected "test-cases/scss-tests/071_test_mixin_splat_args_with_var_args_preserves_separator/expected_output.css" but got "test-cases/scss-tests/071_test_mixin_splat_args_with_var_args_preserves_separator/test_output.css"
+    outfile
+072_test_mixin_var_and_splat_args_pass_through_keywords .............. [ PASS]
+078_test_mixin_list_of_pairs_splat_treated_as_list ................... [ PASS]
+083_test_function_var_args ........................................... [ PASS]
+084_test_function_empty_var_args ..................................... [ PASS]
+085_test_function_var_args_act_like_list ............................. [ PASS]
+086_test_function_splat_args ......................................... [ PASS]
+087_test_function_splat_expression ................................... [ PASS]
+088_test_function_splat_args_with_var_args ........................... [ PASS]
+089_test_function_splat_args_with_var_args_and_normal_args ........... [ PASS]
+090_test_function_splat_args_with_var_args_preserves_separator ....... [ FAIL]
+    expected "test-cases/scss-tests/090_test_function_splat_args_with_var_args_preserves_separator/expected_output.css" but got "test-cases/scss-tests/090_test_function_splat_args_with_var_args_preserves_separator/test_output.css"
+    outfile
+091_test_function_var_and_splat_args_pass_through_keywords ........... [ PASS]
+098_test_function_list_of_pairs_splat_treated_as_list ................ [ PASS]
+103_test_function_var_args_passed_to_native .......................... [ PASS]
+104_test_basic_selector_interpolation ................................ [ PASS]
+105_test_basic_selector_interpolation ................................ [ PASS]
+106_test_basic_selector_interpolation ................................ [ PASS]
+107_test_selector_only_interpolation ................................. [ PASS]
+108_test_selector_interpolation_before_element_name .................. [ PASS]
+109_test_selector_interpolation_in_string ............................ [ PASS]
+110_test_selector_interpolation_in_pseudoclass ....................... [ PASS]
+111_test_selector_interpolation_at_class_begininng ................... [ PASS]
+112_test_selector_interpolation_at_id_begininng ...................... [ PASS]
+113_test_selector_interpolation_at_pseudo_begininng .................. [ PASS]
+114_test_selector_interpolation_at_attr_beginning .................... [ PASS]
+115_test_selector_interpolation_at_attr_end .......................... [ PASS]
+116_test_selector_interpolation_at_dashes ............................ [ PASS]
+119_test_basic_prop_name_interpolation ............................... [ PASS]
+120_test_basic_prop_name_interpolation ............................... [ PASS]
+121_test_prop_name_only_interpolation ................................ [ PASS]
+122_test_directive_interpolation ..................................... [ PASS]
+123_test_media_interpolation ......................................... [ PASS]
+124_test_script_in_media ............................................. [ PASS]
+125_test_script_in_media ............................................. [ PASS]
+126_test_media_interpolation_with_reparse ............................ [ PASS]
+129_test_supports_bubbling ........................................... [ PASS]
+130_test_random_directive_interpolation .............................. [ PASS]
+131_test_nested_mixin_def ............................................ [ PASS]
+132_test_nested_mixin_shadow ......................................... [ PASS]
+133_test_nested_function_def ......................................... [ PASS]
+134_test_nested_function_shadow ...................................... [ PASS]
+171_test_loud_comment_in_compressed_mode ............................. [ PASS]
+172_test_parsing_decimals_followed_by_comments_doesnt_take_forever ... [ PASS]
+173_test_parsing_many_numbers_doesnt_take_forever .................... [ PASS]
+174_test_import_comments_in_imports .................................. [ PASS]
+176_test_newline_selector_rendered_multiple_times .................... [ PASS]
+177_test_prop_name_interpolation_after_hyphen ........................ [ PASS]
+178_test_star_plus_and_parent ........................................ [ PASS]
+179_test_weird_added_space ........................................... [ PASS]
+180_test_interpolation_with_bracket_on_next_line ..................... [ PASS]
+181_test_interpolation ............................................... [ PASS]
+182_test_mixin_with_keyword_args ..................................... [ PASS]
+183_test_passing_required_args_as_a_keyword_arg ...................... [ PASS]
+184_test_passing_all_as_keyword_args_in_opposite_order ............... [ PASS]
+185_test_keyword_args_in_functions ................................... [ PASS]
+186_test_newlines_removed_from_selectors_when_compressed ............. [ PASS]
+187_test_multiline_var ............................................... [ PASS]
+188_test_mixin_content ............................................... [ PASS]
+189_test_empty_content ............................................... [ PASS]
+190_test_options_passed_to_script .................................... [ PASS]
+191_test_color_translation_functions ................................. [ PASS]
+191_test_extend_in_media_in_rule ..................................... [ PASS]
+126 tests completed in 2.429 seconds.
+2 failures (1.6%).
+124 out of 126 (98.4%) tests passed.
+-- done testing scss-tests ---------------------------------------------------
+
+types ................................................................ [ PASS]
