@@ -8,13 +8,21 @@
         *
         (import scheme chicken)
         (import foreign)
-        (import foreigners)
+        (import data-structures)
+        (use foreigners)
         (require-library sass-values sass-functions sass-context)
         (reexport sass-values sass-functions sass-context)
 
 (foreign-declare "#include <sass.h>")
 
 (include "sass-common-types.scm")
+
+(define (%version%)
+  (let* ((ext-info (extension-information 'sass))
+         (version-datum (and ext-info (alist-ref 'version ext-info))))
+    (if version-datum
+      (car version-datum)
+      "[UNKNOWN]")))
 
 ;; Some convenient string helper function
 (define string-quote
