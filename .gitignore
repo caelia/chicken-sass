@@ -1,6 +1,6 @@
 *.c
 *.so
 *.o
-*.swp
+*.sw?
 *.import.scm
-socket/
+csass
