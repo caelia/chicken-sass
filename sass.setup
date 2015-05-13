@@ -6,6 +6,9 @@
 (compile -O -s -lsass sass-context.import.scm)
 (compile -O -s -lsass sass.scm -j sass)
 (compile -O -s -lsass sass.import.scm)
+(cond-expand
+  [with-csass (compile -O csass.scm)]
+  [else #f])
 (install-extension
   'sass
   '("sass-values.so" "sass-values.import.so"
@@ -13,3 +16,6 @@
     "sass-context.so" "sass-context.import.so"
     "sass.so" "sass.import.so")
   '((version "0.1")))
+(cond-expand
+  [with-csass (install-program 'csass '("csass"))]
+  [else #f])
