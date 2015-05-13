@@ -127,7 +127,7 @@
                      (string->symbol output-style*)
                      (*default-output-style*))))
             (if (member output-style '(nested expanded compact compressed))
-              (sass:option-set-output-style! sass-opts (string->symbol output-style))
+              (sass:option-set-output-style! sass-opts output-style)
               (error "Output style must be one of: nested, expanded, compact, or compressed.")))
           (let ((precision (alist-ref 'p options)))
             (sass:option-set-precision! sass-opts (if precision (string->number precision)
