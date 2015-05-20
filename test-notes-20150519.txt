@@ -1,0 +1,50 @@
+- libsass
+  -var-args
+    type-of($zs) [where $zs represents varargs] should return arg_list,
+    returns list
+
+-libsass-closed-issues
+  -issue_1016
+    selector s.b. .foo [baz=".foo"], actually .foo [baz=""]
+    ~ UPSTREAM ~
+
+  -issue_1092
+    missing white space after colon when interpolation used
+    ~ UPSTREAM ~
+
+  -issue_1178
+    list incorrectly flattened
+    ~ UPSTREAM ~
+
+  -issue_1192
+    keywords should not show in arglist
+    ~UPSTREAM~
+
+  -issue_978
+    see #1016
+    [original issue fixed]
+
+-parser
+  -interpolate
+    -00_concatenation
+      -unspaced
+        Incorrect whitespace in some lines
+
+    -29_binary_operation
+      -todo
+        -06_escape_interpolation
+          Incorrect whitespace
+          [well, it's in 'todo' directory]
+
+    -30_base_test
+      -todo
+        -06_escape_interpolation
+          Incorrect whitespace
+          [same as above test: 29/06]
+
+-scss-tests
+  -071_test_mixin_splat_args_with_var_args_preserves_separator
+    Comma present that should have been removed.
+
+  -090_test_function_splat_args_with_var_args_preserves_separator
+    Same as 071 above.
