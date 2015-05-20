@@ -5,13 +5,14 @@
 ;;;   BSD license. See the accompanying LICENSE file for details.
 
 (module sass
-        *
+        (%version% string-quote string-unquote
+         compile-file compile-data libsass-version)
         (import scheme chicken)
         (import foreign)
         (import data-structures)
         (use foreigners)
         (require-library sass-values sass-functions sass-context)
-        (reexport sass-values sass-functions sass-context)
+        (reexport sass-context)
 
 (foreign-declare "#include <sass.h>")
 
@@ -36,5 +37,14 @@
 (define libsass-version
   (foreign-lambda c-string libsass_version))
 ; const char* libsass_version(void);
+
+(define (compile input-ctx input-options output-options)
+  #f)
+
+(define (compile-file filename input-options output-options)
+  (compile (make-file-context filename) input-options output-options))
+
+(define (compile-data data input-options output-options)
+  (compile (make-data-context data) input-options output-options))
 
 ) ; END MODULE
