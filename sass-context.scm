@@ -6,30 +6,31 @@
 
 (module sass-context
         ( make-options make-file-context make-data-context
-          compile-input-context make-compiler compiler-parse
-          compiler-execute delete-compiler delete-input-context
-          get-context get-options get-options-ptr
-          set-options! precision source-comments
-          source-map-embed source-map-contents omit-source-map-url
-          is-indented-syntax-src indent linefeed
-          input-path output-path plugin-path
-          include-path source-map-file source-map-root
-          c-headers c-importers c-functions
-          set-precision! set-output-style! set-source-comments!
-          set-source-map-embed! set-source-map-contents! set-omit-source-map-url!
-          set-is-indented-syntax-src! set-indent! set-linefeed!
-          set-input-path! set-output-path! set-plugin-path!
-          set-include-path! set-source-map-file! set-source-map-root!
-          set-c-headers! set-c-importers! set-c-functions!
-          output-string error-status error-json
-          error-text error-message error-file
-          error-src error-line error-column
-          source-map-string included-files included-files-size
-          take-error-json take-error-text take-error-message
-          take-error-file take-output-string take-source-map-string
-          take-included-files compiler-get-state compiler-get-context
-          compiler-get-import-stack-size compiler-get-last-import compiler-get-import-entry
-          push-plugin-path push-include-path )
+          input-context-type compile-input-context make-compiler
+          compiler-parse compiler-execute delete-compiler
+          delete-input-context get-context get-options
+          get-options-ptr set-ctx-options! precision
+          source-comments source-map-embed source-map-contents
+          omit-source-map-url is-indented-syntax-src indent
+          linefeed input-path output-path
+          plugin-path include-path source-map-file
+          source-map-root c-headers c-importers
+          c-functions set-precision! set-output-style!
+          set-source-comments! set-source-map-embed! set-source-map-contents!
+          set-omit-source-map-url! set-is-indented-syntax-src! set-indent!
+          set-linefeed! set-input-path! set-output-path!
+          set-plugin-path! set-include-path! set-source-map-file!
+          set-source-map-root! set-c-headers! set-c-importers!
+          set-c-functions! set-options! output-string
+          error-status error-json error-text
+          error-message error-file error-src
+          error-line error-column source-map-string
+          included-files included-files-size take-error-json
+          take-error-text take-error-message take-error-file
+          take-output-string take-source-map-string take-included-files
+          compiler-get-state compiler-get-context compiler-get-import-stack-size
+          compiler-get-last-import compiler-get-import-entry push-plugin-path
+          push-include-path )
         
         (import scheme chicken)
         (import foreign)
@@ -235,7 +236,7 @@
                   (c-pointer sass-data-context) (c-pointer sass-options)))
 ; void sass_data_context_set_options (struct Sass_Data_Context* data_ctx, struct Sass_Options* opt);
 
-(define (set-options! ictx options)    ; EXPORT
+(define (set-ctx-options! ictx options)    ; EXPORT
   ((ictx-handler %file-context-set-options! %data-context-set-options!)
     (input-context-ptr ictx) (options-ptr options)))
 
@@ -348,6 +349,7 @@
 (define (c-functions obj)      ; EXPORT
   (%option-get-c-functions (get-options-ptr obj)))
 
+
 ;;; Setters for Context_Option values
 (define %option-set-precision!
   (foreign-lambda void sass_option_set_precision (c-pointer sass-options) int))
@@ -457,6 +459,32 @@
 (define (set-c-functions! obj value)      ; EXPORT
   (%option-set-c-functions! (get-options-ptr obj) value))
 
+(define (set-options! obj #!key (precision #f) (output-style #f) (source-comments 'undefined)
+                      (source-map-embed 'undefined) (source-map-contents 'undefined)
+                      (omit-source-map-url 'undefined) (is-indented-syntax-src 'undefined)
+                      (indent #f) (linefeed #f) (input-path #f) (output-path #f)
+                      (plugin-path #f) (include-path #f) (source-map-file #f)
+                      (source-map-root #f) (c-headers #f) (c-importers #f) (c-functions #f))
+  (let ((ptr (get-options-ptr obj))
+        (defined? (lambda (kwarg) (not (eqv? kwarg 'undefined)))))
+    (when precision (%option-set-precision! ptr precision))
+    (when output-style (%option-set-output-style! ptr output-style))
+    (when (defined? source-comments) (%option-set-source-comments! ptr source-comments))
+    (when (defined? source-map-embed) (%option-set-source-map-embed! ptr source-map-embed))
+    (when (defined? source-map-contents) (%option-set-source-map-contents! ptr source-map-contents))
+    (when (defined? omit-source-map-url) (%option-set-omit-source-map-url! ptr omit-source-map-url))
+    (when (defined? is-indented-syntax-src) (%option-set-is-indented-syntax-src! ptr is-indented-syntax-src))
+    (when indent (%option-set-indent! ptr indent))
+    (when linefeed (%option-set-linefeed! ptr linefeed))
+    (when input-path (%option-set-input-path! ptr input-path))
+    (when output-path (%option-set-output-path! ptr output-path))
+    (when plugin-path (%option-set-plugin-path! ptr plugin-path))
+    (when include-path (%option-set-include-path! ptr include-path))
+    (when source-map-file (%option-set-source-map-file! ptr source-map-file))
+    (when source-map-root (%option-set-source-map-root! ptr source-map-root))
+    (when c-headers (%option-set-c-headers! ptr c-headers))
+    (when c-importers (%option-set-c-importers! ptr c-importers))
+    (when c-functions (%option-set-c-functions! ptr c-functions))))
 
 ;;; Getters for Sass_Context values
 (define %context-get-output-string
