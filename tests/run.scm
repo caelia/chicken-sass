@@ -1,11 +1,11 @@
 (use test)
 (use srfi-1)
+(use (prefix sass sass:))
 
 (include "test-support.scm")
 
 (current-test-comparator file=?)
 (define test-data-root (make-parameter "test-cases"))
-(define csass-cmd (make-parameter #f))
 
 (define disabled-tests '())
 
@@ -34,9 +34,8 @@
          (test-path (make-pathname parent-path test-subpath))
          (ref-file (make-pathname test-path "expected_output.css"))
          (outfile (make-pathname test-path "test_output.css"))
-         (infile (make-pathname test-path "input.scss"))
-         (cmd (sprintf "~A -o ~A ~A" (csass-cmd) outfile infile)))
-    (system cmd)
+         (infile (make-pathname test-path "input.scss")))
+    (sass:compile-file infile output: outfile input-path: infile output-path: outfile)
     (test label ref-file outfile)))
 
 (define (run-test-group parent-path group-subpath)
@@ -50,13 +49,6 @@
         (sort (directory group-path) string<?))))) 
 
 (define (run-tests path)
-  (cond-expand
-    [with-csass
-      (csass-cmd "../csass")]
-    [else
-      (system "cp ../csass.scm .")
-      (system "csc csass.scm")
-      (csass-cmd "./csass")])
   (for-each
     (lambda (subpath)
       (if (test-case? path subpath)
