@@ -1,7 +1,9 @@
-;;; sass-common-types.scm -- Shared type definitions for libsass wrapper.
+;;; sass-common.scm -- Shared definitions for libsass wrapper.
 ;;;   Copyright © 2015 by Matthew C. Gushee <matt@gushee.net>
 ;;;   This program is open-source software, released under the
 ;;;   BSD license. See the accompanying LICENSE file for details.
+
+(use extras)
 
 (foreign-declare "#include <sass_values.h>")
 (foreign-declare "#include <sass_functions.h>")
@@ -42,3 +44,6 @@
 ; typedef struct Sass_Function (*Sass_Function_Entry);
 (define-foreign-type function-list (c-pointer (c-pointer (struct "Sass_Function"))))
 ; typedef struct Sass_Function* (*Sass_Function_List);
+
+(define (eprintf fmt . args)
+  (error (apply sprintf `(,fmt ,@args))))

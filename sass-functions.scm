@@ -10,7 +10,7 @@
         (import foreign)
         (use foreigners)
 
-(include "sass-common-types.scm")
+(include "sass-common.scm")
 
 ;;; Forward declaration
 ;; Possibly don't need to do anything with these

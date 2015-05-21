@@ -16,7 +16,7 @@
 
 (foreign-declare "#include <sass.h>")
 
-(include "sass-common-types.scm")
+(include "sass-common.scm")
 
 (define (%version%)
   (let* ((ext-info (extension-information 'sass))

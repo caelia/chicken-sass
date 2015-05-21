@@ -12,7 +12,7 @@
 
 (foreign-declare "#include <sass_values.h>")
 
-(include "sass-common-types.scm")
+(include "sass-common.scm")
 
 (define-foreign-enum-type (sass-tag int)
   (sass-tag->int int->sass-tag)
