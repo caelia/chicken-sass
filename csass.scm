@@ -112,7 +112,7 @@
                     source-map-file: ,source-map-file)))
             (cond
               ((and from-stdin (not infile))
-               (apply sass:compile-stdin kwargs))
+               (apply sass:compile-from-port `(,(current-input-port) ,@kwargs)))
               ((and infile (not from-stdin))
                (apply sass:compile-file `(,infile ,@kwargs)))
               (else

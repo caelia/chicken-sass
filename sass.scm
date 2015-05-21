@@ -6,7 +6,7 @@
 
 (module sass
         (%version% string-quote string-unquote
-         compile-file compile-string compile-stdin
+         compile-file compile-string compile-from-port
          libsass-version)
         (import scheme chicken)
         (import foreign)
@@ -102,6 +102,8 @@
           (map-file (and (eqv? (input-context-type input-ctx) 'file)
                          (opt-source-map-file sass-opts))))
       (cond
+        ((and output-str (port? output))
+         (display output-str output))
         ((and output-str (eqv? output 'stdout))
          (display output-str))
         (output-str
@@ -125,8 +127,8 @@
 (define (compile-string data . kwargs)
   (apply compile `(,(make-data-context data) ,@kwargs)))
 
-(define (compile-stdin . kwargs)
-  (let ((data (read-all)))
+(define (compile-from-port port . kwargs)
+  (let ((data (read-all port)))
     (when (string=? data "")
       (error "No input."))
     (apply compile `(,(make-data-context data) ,@kwargs))))
