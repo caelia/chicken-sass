@@ -16,10 +16,10 @@
 
 (define-foreign-type sass-options (struct "Sass_Options"))
 ; struct Sass_Options; // base struct
-(define-record-type options
-  (make-options ptr)
-  options?
-  (ptr options-ptr))
+; (define-record-type options
+;   (make-options ptr)
+;   options?
+;   (ptr options-ptr))
 
 (define-foreign-enum-type (output-style int)
   (output-style->int int->output-style)

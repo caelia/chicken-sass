@@ -20,6 +20,14 @@
 
 (include "sass-common.scm")
 
+(define *default-include-paths* (make-parameter #f))
+(define *default-precision* (make-parameter 5))
+(define *default-output-style* (make-parameter 'nested))
+
+(cond-expand
+  (windows (define-constant PATH-SEP ";"))
+  (else (define-constant PATH-SEP ":")))
+
 (define (%version%)
   (let* ((ext-info (extension-information 'sass))
          (version-datum (and ext-info (alist-ref 'version ext-info))))
@@ -47,13 +55,24 @@
                                  (plugin-path #f) (include-path #f) (source-map-file #f)
                                  (source-map-root #f) (c-headers #f) (c-importers #f) (c-functions #f))
 
-  (let ((output-ctx (get-context input-ctx))
-        (options (make-options))
-        (cleanup (lambda () (delete-input-context input-ctx))))
+  (let* ((output-ctx (get-context input-ctx))
+         (options (make-options))
+         (cleanup (lambda () (delete-input-context input-ctx)))
+         (default-inc-paths (*default-include-paths*))
+         (all-include-paths
+           (cond
+             ((and include-path default-inc-paths)
+              (string-append include-path PATH-SEP default-inc-paths))
+             (include-path
+               include-path)
+             (default-inc-paths
+               default-inc-paths)
+             (else
+               ""))))
 
     (set-options! options
-                  precision: precision
-                  output-style: output-style
+                  precision: (or precision (*default-precision*))
+                  output-style: (or output-style (*default-output-style*))
                   source-comments: source-comments
                   source-map-embed: source-map-embed
                   source-map-contents: source-map-contents
@@ -64,7 +83,7 @@
                   input-path: input-path
                   output-path: output-path
                   plugin-path: plugin-path
-                  include-path: include-path
+                  include-path: all-include-paths
                   source-map-file: source-map-file
                   source-map-root: source-map-root
                   c-headers: c-headers

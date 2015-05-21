@@ -10,67 +10,6 @@
 (use args)
 
 
-(cond-expand
-  (windows (define-constant PATH-SEP ";"))
-  (else (define-constant PATH-SEP ":")))
-
-(define *default-import-paths* (make-parameter #f))
-(define *default-precision* (make-parameter 5))
-(define *default-output-style* (make-parameter 'nested))
-
-(define (output err-status err-msg output-str output-file)
-  (cond
-    ((not (zero? err-status))
-     (error (or err-msg "Unknown error.")))
-    ((and output-str output-file)
-     (with-output-to-file output-file
-       (lambda () (display output-str))))
-    (output-str
-      (display output-str))
-    (else
-      (print "No output."))))
-
-(define (compile-stdin options outfile)
-  (let ((source-string (with-output-to-string read-all)))
-    (if (string=? source-string "")
-      (error "No input.")
-      (let* ((data-ctx (sass:make-data-context source-string))
-             (output-ctx (sass:data-context-get-context data-ctx)))
-        (sass:data-context-set-options data-ctx options)
-
-        (sass:compile-data-context data-ctx)
-
-        (output (sass:context-get-error-status ctx)
-                (sass:context-get-error-message ctx)
-                (sass:context-get-output-string ctx)
-                outfile)
-
-        (sass:delete-data-context data-ctx)))))
-
-(define (compile-file options infile outfile)
-  (let* ((file-ctx (sass:make-file-context infile))
-         (output-ctx (sass:file-context-get-context file-ctx)))
-    (when outfile
-      (sass:option-set-output-path! options outfile))
-    (sass:option-set-input-path! options infile)
-    (sass:file-context-set-options! file-ctx options)
-
-    (sass:compile-file-context file-ctx)
-
-    (output (sass:context-get-error-status output-ctx)
-            (sass:context-get-error-message output-ctx)
-            (sass:context-get-output-string output-ctx)
-            outfile)
-
-    (let ((map-file (sass:option-get-source-map-file options)))
-      (when map-file
-        (output (sass:context-get-error-status output-ctx)
-                (sass:context-get-error-message output-ctx)
-                (sass:context-get-source-map-string output-ctx)
-                (sass:context-get-source-map-file output-ctx))))
-
-    (sass:delete-file-context file-ctx)))
-
 (define opts
   `(,(args:make-option (s stdin) #:none
                        "Read input from stdin.")
@@ -112,6 +51,16 @@
       ((eqv? (caar opts) key) #t)
       (else (loop (cdr opts))))))
 
+(define (get-arg key options)
+  (let loop ((opts options))
+    (cond
+      ((null? opts) 'undefined)
+      ((eqv? (caar opts) key) (cdar opts))
+      (else (loop (cdr opts))))))
+
+(define (defined? var)
+  (not (eqv? var 'undefined))) 
+
 (define (run)
   (receive (options operands)
     (args:parse (command-line-arguments) opts)
@@ -119,50 +68,53 @@
       ((have-option? 'h options) (usage) (exit 0))
       ((have-option? 'v options) (version) (exit 0))
       (else
-        (let ((sass-opts (sass:make-options)))
-          (let* ((output-style*
-                   (alist-ref 't options))
-                 (output-style
-                   (if output-style*
-                     (string->symbol output-style*)
-                     (*default-output-style*))))
-            (if (member output-style '(nested expanded compact compressed))
-              (sass:option-set-output-style! sass-opts output-style)
-              (error "Output style must be one of: nested, expanded, compact, or compressed.")))
-          (let ((precision (alist-ref 'p options)))
-            (sass:option-set-precision! sass-opts (if precision (string->number precision)
-                                                    (*default-precision*))))
-          (let* ((cl-paths (alist-ref 'I options))
-                 (default-paths (*default-import-paths*))
-                 (import-paths
-                   (cond
-                     ((and cl-paths default-paths)
-                      (string-append cl-import-paths PATH-SEP default-paths))
-                     (cl-paths
-                       cl-paths)
-                     (default-paths
-                       default-paths)
-                     (else
-                       ""))))
-            (sass:option-set-include-path! sass-opts import-paths))
-          (if (have-option? 'l options)
-            (sass:option-set-source-comments! sass-opts #t)
-            (sass:option-set-source-comments! sass-opts #f))
-          (if (have-option? 'M options)
-            (sass:option-set-omit-source-map-url! sass-opts #t)
-            (sass:option-set-omit-source-map-url! sass-opts #f))
-          (let ((infile (and (= (length operands) 1) (car operands)))
-                (outfile (alist-ref 'o options))
-                (from-stdin (have-option? 's options))
-                (emit-source-map (have-option? 'm options)))
-            (when (and outfile emit-source-map)
-              (sass:option-set-source-map-file! sass-opts (string-append outfile ".map"))) 
+        (let* ((output-style*
+                 (alist-ref 't options))
+               (output-style
+                 (and output-style* (string->symbol output-style*)))
+               (precision*
+                 (alist-ref 'p options))
+               (precision
+                 (and precision* (string->number precision*)))
+               (include-paths
+                 (alist-ref 'I options))
+               (source-comments
+                 (get-arg 'l options))
+               (omit-source-map-url
+                 (get-arg 'M options))
+               (infile
+                 (and (= (length operands) 1) (car operands)))
+               (outfile
+                 (alist-ref 'o options))
+               (output
+                 (or outfile 'stdout))
+               (from-stdin
+                 (have-option? 's options))
+               (emit-source-map
+                 (have-option? 'm options))
+               (source-map-file
+                 (and outfile
+                      emit-source-map
+                      (string-append outfile ".map"))))
+          (unless (or (not output-style)
+                      (member output-style '(nested expanded compact compressed)))
+            (error "Output style must be one of: nested, expanded, compact, or compressed."))
+
+          (let ((kwargs
+                  `(output: ,output
+                    output-style: ,output-style
+                    precision: ,precision
+                    include-path: ,include-paths
+                    source-comments: ,source-comments
+                    omit-source-map-url: ,omit-source-map-url
+                    source-map-file: ,source-map-file)))
             (cond
               ((and from-stdin (not infile))
-               (compile-stdin sass-opts outfile))
+               (apply sass:compile-stdin kwargs))
               ((and infile (not from-stdin))
-               (compile-file sass-opts infile outfile))
+               (apply sass:compile-file `(,infile ,@kwargs)))
               (else
                 (error "Please specify an input file OR the -s option (and not both).")))))))))
+
 
 (run)
