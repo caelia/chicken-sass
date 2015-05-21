@@ -56,7 +56,7 @@
                                  (source-map-root #f) (c-headers #f) (c-importers #f) (c-functions #f))
 
   (let* ((output-ctx (get-context input-ctx))
-         (options (make-options))
+         (sass-opts (make-options))
          (cleanup (lambda () (delete-input-context input-ctx)))
          (default-inc-paths (*default-include-paths*))
          (all-include-paths
@@ -70,7 +70,7 @@
              (else
                ""))))
 
-    (set-options! options
+    (set-options! sass-opts
                   precision: (or precision (*default-precision*))
                   output-style: (or output-style (*default-output-style*))
                   source-comments: source-comments
@@ -90,23 +90,24 @@
                   c-importers: c-importers
                   c-functions: c-functions)
 
-    (set-ctx-options! input-ctx options)
+    (set-ctx-options! input-ctx sass-opts)
     (compile-input-context input-ctx)
 
     (unless (zero? (error-status output-ctx))
-      (cleanup)
-      (error (or (error-message output-ctx) "Unknown error.")))
+      (let ((msg (or (error-message output-ctx) "Unknown error.")))
+        (cleanup)
+        (error msg)))
 
     (let ((output-str (output-string output-ctx))
           (map-file (and (eqv? (input-context-type input-ctx) 'file)
-                         (source-map-file options))))
+                         (opt-source-map-file sass-opts))))
       (cond
         ((and output-str (eqv? output 'stdout))
          (display output-str))
         (output-str
-          (with-output-to-file output (lambda () (display output-str)))
+          (with-output-to-file output (lambda () (display output-str))))
         (else
-          (print "No output."))))
+          (print "No output.")))
 
       (when map-file
         (let ((map-string (source-map-string output-ctx)))

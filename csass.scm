@@ -104,6 +104,8 @@
                   `(output: ,output
                     output-style: ,output-style
                     precision: ,precision
+                    output-path: ,outfile
+                    input-path: ,infile
                     include-path: ,include-paths
                     source-comments: ,source-comments
                     omit-source-map-url: ,omit-source-map-url

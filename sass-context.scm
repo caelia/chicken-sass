@@ -9,28 +9,27 @@
           input-context-type compile-input-context make-compiler
           compiler-parse compiler-execute delete-compiler
           delete-input-context get-context get-options
-          get-options-ptr set-ctx-options! precision
-          source-comments source-map-embed source-map-contents
-          omit-source-map-url is-indented-syntax-src indent
-          linefeed input-path output-path
-          plugin-path include-path source-map-file
-          source-map-root c-headers c-importers
-          c-functions set-precision! set-output-style!
-          set-source-comments! set-source-map-embed! set-source-map-contents!
-          set-omit-source-map-url! set-is-indented-syntax-src! set-indent!
-          set-linefeed! set-input-path! set-output-path!
-          set-plugin-path! set-include-path! set-source-map-file!
-          set-source-map-root! set-c-headers! set-c-importers!
-          set-c-functions! set-options! output-string
-          error-status error-json error-text
-          error-message error-file error-src
-          error-line error-column source-map-string
-          included-files included-files-size take-error-json
-          take-error-text take-error-message take-error-file
-          take-output-string take-source-map-string take-included-files
-          compiler-get-state compiler-get-context compiler-get-import-stack-size
-          compiler-get-last-import compiler-get-import-entry push-plugin-path
-          push-include-path )
+          set-ctx-options! opt-precision opt-source-comments
+          opt-source-map-embed opt-source-map-contents opt-omit-source-map-url
+          opt-is-indented-syntax-src opt-indent opt-linefeed
+          opt-input-path opt-output-path opt-plugin-path
+          opt-include-path opt-source-map-file opt-source-map-root
+          opt-c-headers opt-c-importers opt-c-functions
+          opt-precision-set! opt-output-style-set! opt-source-comments-set!
+          opt-source-map-embed-set! opt-source-map-contents-set! opt-omit-source-map-url-set!
+          opt-is-indented-syntax-src-set! opt-indent-set! opt-linefeed-set!
+          opt-input-path-set! opt-output-path-set! opt-plugin-path-set!
+          opt-include-path-set! opt-source-map-file-set! opt-source-map-root-set!
+          opt-c-headers-set! opt-c-importers-set! opt-c-functions-set!
+          set-options! output-string error-status
+          error-json error-text error-message
+          error-file error-src error-line
+          error-column source-map-string included-files
+          included-files-size take-error-json take-error-text
+          take-error-message take-error-file take-output-string
+          take-source-map-string take-included-files compiler-get-state
+          compiler-get-context compiler-get-import-stack-size compiler-get-last-import
+          compiler-get-import-entry push-plugin-path push-include-path )
         
         (import scheme chicken)
         (import foreign)
@@ -221,8 +220,8 @@
   ((ctx-handler %context-get-options %file-context-get-options %data-context-get-options)
     (get-ctx-ptr ctx)))
 
-(define (get-options-ptr obj)   ; EXPORT
-  (options-ptr (if (options? obj) obj (get-options obj))))
+; (define (get-options-ptr obj)   ; EXPORT
+  ; (options-ptr (if (options? obj) obj (get-options obj))))
     
 
 (define %file-context-set-options!
@@ -238,226 +237,226 @@
 
 (define (set-ctx-options! ictx options)    ; EXPORT
   ((ictx-handler %file-context-set-options! %data-context-set-options!)
-    (input-context-ptr ictx) (options-ptr options)))
+    (input-context-ptr ictx) options))
 
 ;;; Getters for Context_Option values
 (define %option-get-precision
   (foreign-lambda int sass_option_get_precision (c-pointer sass-options)))
 ; int sass_option_get_precision (struct Sass_Options* options);
-(define (precision obj)   ; EXPORT
-  (%option-get-precision (get-options-ptr obj)))
+(define (opt-precision obj)   ; EXPORT
+  (%option-get-precision obj))
 
 (define %option-get-output-style
   (foreign-lambda output-style sass_option_get_output_style (c-pointer sass-options)))
 ; enum Sass_Output_Style sass_option_get_output_style (struct Sass_Options* options);
-(define (output-style obj)
-  (%option-get-output-style (get-options-ptr obj)))
+(define (opt-output-style obj)
+  (%option-get-output-style obj))
 
 (define %option-get-source-comments
   (foreign-lambda bool sass_option_get_source_comments (c-pointer sass-options)))
 ; bool sass_option_get_source_comments (struct Sass_Options* options);
-(define (source-comments obj)      ; EXPORT
-  (%option-get-source-comments (get-options-ptr obj)))
+(define (opt-source-comments obj)      ; EXPORT
+  (%option-get-source-comments obj))
 
 (define %option-get-source-map-embed
   (foreign-lambda bool sass_option_get_source_map_embed (c-pointer sass-options)))
 ; bool sass_option_get_source_map_embed (struct Sass_Options* options);
-(define (source-map-embed obj)      ; EXPORT
-  (%option-get-source-map-embed (get-options-ptr obj)))
+(define (opt-source-map-embed obj)      ; EXPORT
+  (%option-get-source-map-embed obj))
 
 (define %option-get-source-map-contents
   (foreign-lambda bool sass_option_get_source_map_contents (c-pointer sass-options)))
 ; bool sass_option_get_source_map_contents (struct Sass_Options* options);
-(define (source-map-contents obj)      ; EXPORT
-  (%option-get-source-map-contents (get-options-ptr obj)))
+(define (opt-source-map-contents obj)      ; EXPORT
+  (%option-get-source-map-contents obj))
 
 (define %option-get-omit-source-map-url
   (foreign-lambda bool sass_option_get_omit_source_map_url (c-pointer sass-options)))
 ; bool sass_option_get_omit_source_map_url (struct Sass_Options* options);
-(define (omit-source-map-url obj)      ; EXPORT
-  (%option-get-omit-source-map-url (get-options-ptr obj)))
+(define (opt-omit-source-map-url obj)      ; EXPORT
+  (%option-get-omit-source-map-url obj))
 
 (define %option-get-is-indented-syntax-src
   (foreign-lambda bool sass_option_get_is_indented_syntax_src (c-pointer sass-options)))
 ; bool sass_option_get_is_indented_syntax_src (struct Sass_Options* options);
-(define (is-indented-syntax-src obj)      ; EXPORT
-  (%option-get-is-indented-syntax-src (get-options-ptr obj)))
+(define (opt-is-indented-syntax-src obj)      ; EXPORT
+  (%option-get-is-indented-syntax-src obj))
 
 (define %option-get-indent
   (foreign-lambda c-string sass_option_get_indent (c-pointer sass-options)))
 ; const char* sass_option_get_indent (struct Sass_Options* options);
-(define (indent obj)      ; EXPORT
-  (%option-get-indent (get-options-ptr obj)))
+(define (opt-indent obj)      ; EXPORT
+  (%option-get-indent obj))
 
 (define %option-get-linefeed
   (foreign-lambda c-string sass_option_get_linefeed (c-pointer sass-options)))
 ; const char* sass_option_get_linefeed (struct Sass_Options* options);
-(define (linefeed obj)      ; EXPORT
-  (%option-get-linefeed (get-options-ptr obj)))
+(define (opt-linefeed obj)      ; EXPORT
+  (%option-get-linefeed obj))
 
 (define %option-get-input-path
   (foreign-lambda c-string sass_option_get_input_path (c-pointer sass-options)))
 ; const char* sass_option_get_input_path (struct Sass_Options* options);
-(define (input-path obj)      ; EXPORT
-  (%option-get-input-path (get-options-ptr obj)))
+(define (opt-input-path obj)      ; EXPORT
+  (%option-get-input-path obj))
 
 (define %option-get-output-path
   (foreign-lambda c-string sass_option_get_output_path (c-pointer sass-options)))
 ; const char* sass_option_get_output_path (struct Sass_Options* options);
-(define (output-path obj)      ; EXPORT
-  (%option-get-output-path (get-options-ptr obj)))
+(define (opt-output-path obj)      ; EXPORT
+  (%option-get-output-path obj))
 
 (define %option-get-plugin-path
   (foreign-lambda c-string sass_option_get_plugin_path (c-pointer sass-options)))
 ; const char* sass_option_get_plugin_path (struct Sass_Options* options);
-(define (plugin-path obj)      ; EXPORT
-  (%option-get-plugin-path (get-options-ptr obj)))
+(define (opt-plugin-path obj)      ; EXPORT
+  (%option-get-plugin-path obj))
 
 (define %option-get-include-path
   (foreign-lambda c-string sass_option_get_include_path (c-pointer sass-options)))
 ; const char* sass_option_get_include_path (struct Sass_Options* options);
-(define (include-path obj)      ; EXPORT
-  (%option-get-include-path (get-options-ptr obj)))
+(define (opt-include-path obj)      ; EXPORT
+  (%option-get-include-path obj))
 
 (define %option-get-source-map-file
   (foreign-lambda c-string sass_option_get_source_map_file (c-pointer sass-options)))
 ; const char* sass_option_get_source_map_file (struct Sass_Options* options);
-(define (source-map-file obj)      ; EXPORT
-  (%option-get-source-map-file (get-options-ptr obj)))
+(define (opt-source-map-file obj)      ; EXPORT
+  (%option-get-source-map-file obj))
 
 (define %option-get-source-map-root
   (foreign-lambda c-string sass_option_get_source_map_root (c-pointer sass-options)))
 ; const char* sass_option_get_source_map_root (struct Sass_Options* options);
-(define (source-map-root obj)      ; EXPORT
-  (%option-get-source-map-root (get-options-ptr obj)))
+(define (opt-source-map-root obj)      ; EXPORT
+  (%option-get-source-map-root obj))
 
 (define %option-get-c-headers
   (foreign-lambda importer-list sass_option_get_c_headers (c-pointer sass-options)))
 ; Sass_Importer_List sass_option_get_c_headers (struct Sass_Options* options);
-(define (c-headers obj)      ; EXPORT
-  (%option-get-c-headers (get-options-ptr obj)))
+(define (opt-c-headers obj)      ; EXPORT
+  (%option-get-c-headers obj))
 
 (define %option-get-c-importers
   (foreign-lambda importer-list sass_option_get_c_importers (c-pointer sass-options)))
 ; Sass_Importer_List sass_option_get_c_importers (struct Sass_Options* options);
-(define (c-importers obj)      ; EXPORT
-  (%option-get-c-importers (get-options-ptr obj)))
+(define (opt-c-importers obj)      ; EXPORT
+  (%option-get-c-importers obj))
 
 (define %option-get-c-functions
   (foreign-lambda function-list sass_option_get_c_functions (c-pointer sass-options)))
 ; Sass_Function_List sass_option_get_c_functions (struct Sass_Options* options);
-(define (c-functions obj)      ; EXPORT
-  (%option-get-c-functions (get-options-ptr obj)))
+(define (opt-c-functions obj)      ; EXPORT
+  (%option-get-c-functions obj))
 
 
 ;;; Setters for Context_Option values
 (define %option-set-precision!
   (foreign-lambda void sass_option_set_precision (c-pointer sass-options) int))
 ; void sass_option_set_precision (struct Sass_Options* options, int precision);
-(define (set-precision! obj value)      ; EXPORT
-  (%option-set-precision! (get-options-ptr obj) value))
+(define (opt-precision-set! obj value)      ; EXPORT
+  (%option-set-precision! obj value))
 
 (define %option-set-output-style!
   (foreign-lambda void sass_option_set_output_style (c-pointer sass-options) output-style))
 ; void sass_option_set_output_style (struct Sass_Options* options, enum Sass_Output_Style output_style);
-(define (set-output-style! obj value)      ; EXPORT
-  (%option-set-output-style! (get-options-ptr obj) value))
+(define (opt-output-style-set! obj value)      ; EXPORT
+  (%option-set-output-style! obj value))
 
 (define %option-set-source-comments!
   (foreign-lambda void sass_option_set_source_comments (c-pointer sass-options) bool))
 ; void sass_option_set_source_comments (struct Sass_Options* options, bool source_comments);
-(define (set-source-comments! obj value)      ; EXPORT
-  (%option-set-source-comments! (get-options-ptr obj) value))
+(define (opt-source-comments-set! obj value)      ; EXPORT
+  (%option-set-source-comments! obj value))
 
 (define %option-set-source-map-embed!
   (foreign-lambda void sass_option_set_source_map_embed (c-pointer sass-options) bool))
 ; void sass_option_set_source_map_embed (struct Sass_Options* options, bool source_map_embed);
-(define (set-source-map-embed! obj value)      ; EXPORT
-  (%option-set-source-map-embed! (get-options-ptr obj) value))
+(define (opt-source-map-embed-set! obj value)      ; EXPORT
+  (%option-set-source-map-embed! obj value))
 
 (define %option-set-source-map-contents!
   (foreign-lambda void sass_option_set_source_map_contents (c-pointer sass-options) bool))
 ; void sass_option_set_source_map_contents (struct Sass_Options* options, bool source_map_contents);
-(define (set-source-map-contents! obj value)      ; EXPORT
-  (%option-set-source-map-contents! (get-options-ptr obj) value))
+(define (opt-source-map-contents-set! obj value)      ; EXPORT
+  (%option-set-source-map-contents! obj value))
 
 (define %option-set-omit-source-map-url!
   (foreign-lambda void sass_option_set_omit_source_map_url (c-pointer sass-options) bool))
 ; void sass_option_set_omit_source_map_url (struct Sass_Options* options, bool omit_source_map_url);
-(define (set-omit-source-map-url! obj value)      ; EXPORT
-  (%option-set-omit-source-map-url! (get-options-ptr obj) value))
+(define (opt-omit-source-map-url-set! obj value)      ; EXPORT
+  (%option-set-omit-source-map-url! obj value))
 
 (define %option-set-is-indented-syntax-src!
   (foreign-lambda void sass_option_set_is_indented_syntax_src (c-pointer sass-options) bool))
 ; void sass_option_set_is_indented_syntax_src (struct Sass_Options* options, bool is_indented_syntax_src);
-(define (set-is-indented-syntax-src! obj value)      ; EXPORT
-  (%option-set-is-indented-syntax-src! (get-options-ptr obj) value))
+(define (opt-is-indented-syntax-src-set! obj value)      ; EXPORT
+  (%option-set-is-indented-syntax-src! obj value))
 
 (define %option-set-indent!
   (foreign-lambda void sass_option_set_indent (c-pointer sass-options) c-string))
 ; void sass_option_set_indent (struct Sass_Options* options, const char* indent);
-(define (set-indent! obj value)      ; EXPORT
-  (%option-set-indent! (get-options-ptr obj) value))
+(define (opt-indent-set! obj value)      ; EXPORT
+  (%option-set-indent! obj value))
 
 (define %option-set-linefeed!
   (foreign-lambda void sass_option_set_linefeed (c-pointer sass-options) c-string))
 ; void sass_option_set_linefeed (struct Sass_Options* options, const char* linefeed);
-(define (set-linefeed! obj value)      ; EXPORT
-  (%option-set-linefeed! (get-options-ptr obj) value))
+(define (opt-linefeed-set! obj value)      ; EXPORT
+  (%option-set-linefeed! obj value))
 
 (define %option-set-input-path!
   (foreign-lambda void sass_option_set_input_path (c-pointer sass-options) c-string))
 ; void sass_option_set_input_path (struct Sass_Options* options, const char* input_path);
-(define (set-input-path! obj value)      ; EXPORT
-  (%option-set-input-path! (get-options-ptr obj) value))
+(define (opt-input-path-set! obj value)      ; EXPORT
+  (%option-set-input-path! obj value))
 
 (define %option-set-output-path!
   (foreign-lambda void sass_option_set_output_path (c-pointer sass-options) c-string))
 ; void sass_option_set_output_path (struct Sass_Options* options, const char* output_path);
-(define (set-output-path! obj value)      ; EXPORT
-  (%option-set-output-path! (get-options-ptr obj) value))
+(define (opt-output-path-set! obj value)      ; EXPORT
+  (%option-set-output-path! obj value))
 
 (define %option-set-plugin-path!
   (foreign-lambda void sass_option_set_plugin_path (c-pointer sass-options) c-string))
 ; void sass_option_set_plugin_path (struct Sass_Options* options, const char* plugin_path);
-(define (set-plugin-path! obj value)      ; EXPORT
-  (%option-set-plugin-path! (get-options-ptr obj) value))
+(define (opt-plugin-path-set! obj value)      ; EXPORT
+  (%option-set-plugin-path! obj value))
 
 (define %option-set-include-path!
   (foreign-lambda void sass_option_set_include_path (c-pointer sass-options) c-string))
 ; void sass_option_set_include_path (struct Sass_Options* options, const char* include_path);
-(define (set-include-path! obj value)      ; EXPORT
-  (%option-set-include-path! (get-options-ptr obj) value))
+(define (opt-include-path-set! obj value)      ; EXPORT
+  (%option-set-include-path! obj value))
 
 (define %option-set-source-map-file!
   (foreign-lambda void sass_option_set_source_map_file (c-pointer sass-options) c-string))
 ; void sass_option_set_source_map_file (struct Sass_Options* options, const char* source_map_file);
-(define (set-source-map-file! obj value)      ; EXPORT
-  (%option-set-source-map-file! (get-options-ptr obj) value))
+(define (opt-source-map-file-set! obj value)      ; EXPORT
+  (%option-set-source-map-file! obj value))
 
 (define %option-set-source-map-root!
   (foreign-lambda void sass_option_set_source_map_root (c-pointer sass-options) c-string))
 ; void sass_option_set_source_map_root (struct Sass_Options* options, const char* source_map_root);
-(define (set-source-map-root! obj value)      ; EXPORT
-  (%option-set-source-map-root! (get-options-ptr obj) value))
+(define (opt-source-map-root-set! obj value)      ; EXPORT
+  (%option-set-source-map-root! obj value))
 
 (define %option-set-c-headers!
   (foreign-lambda void sass_option_set_c_headers (c-pointer sass-options) importer-list))
 ; void sass_option_set_c_headers (struct Sass_Options* options, Sass_Importer_List c_headers);
-(define (set-c-headers! obj value)      ; EXPORT
-  (%option-set-c-headers! (get-options-ptr obj) value))
+(define (opt-c-headers-set! obj value)      ; EXPORT
+  (%option-set-c-headers! obj value))
 
 (define %option-set-c-importers!
   (foreign-lambda void sass_option_set_c_importers (c-pointer sass-options) importer-list))
 ; void sass_option_set_c_importers (struct Sass_Options* options, Sass_Importer_List c_importers);
-(define (set-c-importers! obj value)      ; EXPORT
-  (%option-set-c-importers! (get-options-ptr obj) value))
+(define (opt-c-importers-set! obj value)      ; EXPORT
+  (%option-set-c-importers! obj value))
 
 (define %option-set-c-functions!
   (foreign-lambda void sass_option_set_c_functions (c-pointer sass-options) function-list))
 ; void sass_option_set_c_functions (struct Sass_Options* options, Sass_Function_List c_functions);
-(define (set-c-functions! obj value)      ; EXPORT
-  (%option-set-c-functions! (get-options-ptr obj) value))
+(define (opt-c-functions-set! obj value)      ; EXPORT
+  (%option-set-c-functions! obj value))
 
 (define (set-options! obj #!key (precision #f) (output-style #f) (source-comments 'undefined)
                       (source-map-embed 'undefined) (source-map-contents 'undefined)
@@ -465,7 +464,7 @@
                       (indent #f) (linefeed #f) (input-path #f) (output-path #f)
                       (plugin-path #f) (include-path #f) (source-map-file #f)
                       (source-map-root #f) (c-headers #f) (c-importers #f) (c-functions #f))
-  (let ((ptr (get-options-ptr obj))
+  (let ((ptr obj)
         (defined? (lambda (kwarg) (not (eqv? kwarg 'undefined)))))
     (when precision (%option-set-precision! ptr precision))
     (when output-style (%option-set-output-style! ptr output-style))
@@ -627,12 +626,12 @@
   (foreign-lambda void sass_option_push_plugin_path (c-pointer sass-options) c-string))
 ; void sass_option_push_plugin_path (struct Sass_Options* options, const char* path);
 (define (push-plugin-path opts path)    ; EXPORT
-  (%option-push-plugin-path (options-ptr opts) path))
+  (%option-push-plugin-path opts path))
 
 (define %option-push-include-path
   (foreign-lambda void sass_option_push_include_path (c-pointer sass-options) c-string))
 ; void sass_option_push_include_path (struct Sass_Options* options, const char* path);
 (define (push-include-path opts path)   ; EXPORT
-  (%option-push-include-path (options-ptr opts) path))
+  (%option-push-include-path opts path))
 
 ) ; END MODULE
