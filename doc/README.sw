@@ -20,21 +20,28 @@ Matt Gushee <matt@gushee.net>
 [[foreigners]], [[http://libsass.org/|libsass]]
 
 
-=== Installation Notes
+=== High-level API
 
-This egg includes a command-line Sass compiler called {{csass}}. However,
-since at this point it is simply [[https://github.com/sass/sassc|sassc]]
-rewritten in Scheme, so it is perhaps redundant and thus will not be installed by default. If you wish to install {{csass}}, pass the {{-D with-csass}}
-option to {{chicken-install}}. E.g.,
+==== Usage
 
-    chicken-install -D with-csass sass 
+    (use sass)
 
+==== Procedures
 
-=== API
+<procedure>compile-file      FILENAME  [KWARGS]</procedure>
+<procedure>compile-string    STRING    [KWARGS]</procedure>
+<procedure>compile-from-port PORT      [KWARGS]</procedure>
+
+=== Low-level API
 
 The following documents the entire {{sass-context}} API, which is the primary
-public interface. The {{sass-values}} and {{sass-functions}} modules are
-currently undocumented. 
+public interface to the C library. The {{sass-values}} and {{sass-functions}}
+modules are currently undocumented. 
+
+==== Usage
+
+    (use sass-context)
+
 
 ==== TYPES
 
@@ -48,23 +55,22 @@ A key-value structure containing various options that control the
 obtained using {{context-get-options}}, {{file-context-get-options}},
 or {{data-context-get-options}}.
 
-<type>SASS-FILE-CONTEXT</type>
+<type>OPTIONS</type>
 
-Represents the input file. Use {{make-file-context}} to create.
+Represents a key-value structure of options. Use {{make-options}} to create.
 
-<type>SASS-DATA-CONTEXT</type>
+<type>INPUT-CONTEXT</type>
 
-Represents an input string. Use {{make-data-context}} to create.
+Represents the input file or string. Use {{make-input-context}} to create.
 
-<type>SASS-CONTEXT</type>
+<type>CONTEXT</type>
 
-Represents the output. Use {{file-context-get-context}} or
-{{data-context-get-context}} to create.
+Represents the output. Use {{get-context}} to create.
 
 <type>SASS-COMPILER</type>
 
-Represents the compiler. Use {{make-file-compiler}} or
-{{make-data-compiler}} to create.
+Represents the compiler. Use {{make-compiler}} to create.
+
 
 
 ==== PROCEDURES
@@ -121,77 +127,77 @@ Returns a SASS-CONTEXT object.
 
 <procedure>(data-context-set-options! SASS-DATA-CONTEXT SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-precision SASS-OPTIONS)</procedure>
+<procedure>(opt-precision SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-output-style SASS-OPTIONS)</procedure>
+<procedure>(opt-output-style SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-source-comments SASS-OPTIONS)</procedure>
+<procedure>(opt-source-comments SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-source-map-embed SASS-OPTIONS)</procedure>
+<procedure>(opt-source-map-embed SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-source-map-contents SASS-OPTIONS)</procedure>
+<procedure>(opt-source-map-contents SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-omit-source-map-url SASS-OPTIONS)</procedure>
+<procedure>(opt-omit-source-map-url SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-is-indented-syntax-src SASS-OPTIONS)</procedure>
+<procedure>(opt-is-indented-syntax-src SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-indent SASS-OPTIONS)</procedure>
+<procedure>(opt-indent SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-linefeed SASS-OPTIONS)</procedure>
+<procedure>(opt-linefeed SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-input-path SASS-OPTIONS)</procedure>
+<procedure>(opt-input-path SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-output-path SASS-OPTIONS)</procedure>
+<procedure>(opt-output-path SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-plugin-path SASS-OPTIONS)</procedure>
+<procedure>(opt-plugin-path SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-include-path SASS-OPTIONS)</procedure>
+<procedure>(opt-include-path SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-source-map-file SASS-OPTIONS)</procedure>
+<procedure>(opt-source-map-file SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-source-map-root SASS-OPTIONS)</procedure>
+<procedure>(opt-source-map-root SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-c-headers SASS-OPTIONS)</procedure>
+<procedure>(opt-c-headers SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-c-importers SASS-OPTIONS)</procedure>
+<procedure>(opt-c-importers SASS-OPTIONS)</procedure>
 
-<procedure>(option-get-c-functions SASS-OPTIONS)</procedure>
+<procedure>(opt-c-functions SASS-OPTIONS)</procedure>
 
-<procedure>(option-set-precision! SASS-OPTIONS INTEGER)</procedure>
+<procedure>(opt-precision-set! SASS-OPTIONS INTEGER)</procedure>
 
-<procedure>(option-set-output-style! SASS-OPTIONS OUTPUT-STYLE)</procedure>
+<procedure>(opt-output-style-set! SASS-OPTIONS OUTPUT-STYLE)</procedure>
 
-<procedure>(option-set-source-comments! SASS-OPTIONS BOOLEAN)</procedure>
+<procedure>(opt-source-comments-set! SASS-OPTIONS BOOLEAN)</procedure>
 
-<procedure>(option-set-source-map-embed! SASS-OPTIONS BOOLEAN)</procedure>
+<procedure>(opt-source-map-embed-set! SASS-OPTIONS BOOLEAN)</procedure>
 
-<procedure>(option-set-source-map-contents! SASS-OPTIONS BOOLEAN)</procedure>
+<procedure>(opt-source-map-contents-set! SASS-OPTIONS BOOLEAN)</procedure>
 
-<procedure>(option-set-omit-source-map-url! SASS-OPTIONS BOOLEAN)</procedure>
+<procedure>(opt-omit-source-map-url-set! SASS-OPTIONS BOOLEAN)</procedure>
 
-<procedure>(option-set-is-indented-syntax-src! SASS-OPTIONS BOOLEAN)</procedure>
+<procedure>(opt-is-indented-syntax-src-set! SASS-OPTIONS BOOLEAN)</procedure>
 
-<procedure>(option-set-indent! SASS-OPTIONS STRING)</procedure>
+<procedure>(opt-indent-set! SASS-OPTIONS STRING)</procedure>
 
-<procedure>(option-set-linefeed! SASS-OPTIONS STRING)</procedure>
+<procedure>(opt-linefeed-set! SASS-OPTIONS STRING)</procedure>
 
-<procedure>(option-set-input-path! SASS-OPTIONS STRING)</procedure>
+<procedure>(opt-input-path-set! SASS-OPTIONS STRING)</procedure>
 
-<procedure>(option-set-output-path! SASS-OPTIONS STRING)</procedure>
+<procedure>(opt-output-path-set! SASS-OPTIONS STRING)</procedure>
 
-<procedure>(option-set-plugin-path! SASS-OPTIONS STRING)</procedure>
+<procedure>(opt-plugin-path-set! SASS-OPTIONS STRING)</procedure>
 
-<procedure>(option-set-include-path! SASS-OPTIONS STRING)</procedure>
+<procedure>(opt-include-path-set! SASS-OPTIONS STRING)</procedure>
 
-<procedure>(option-set-source-map-file! SASS-OPTIONS STRING)</procedure>
+<procedure>(opt-source-map-file-set! SASS-OPTIONS STRING)</procedure>
 
-<procedure>(option-set-source-map-root! SASS-OPTIONS STRING)</procedure>
+<procedure>(opt-source-map-root-set! SASS-OPTIONS STRING)</procedure>
 
-<procedure>(option-set-c-headers! SASS-OPTIONS IMPORTER-LIST)</procedure>
+<procedure>(opt-c-headers-set! SASS-OPTIONS IMPORTER-LIST)</procedure>
 
-<procedure>(option-set-c-importers! SASS-OPTIONS IMPORTER-LIST)</procedure>
+<procedure>(opt-c-importers-set! SASS-OPTIONS IMPORTER-LIST)</procedure>
 
-<procedure>(option-set-c-functions! SASS-OPTIONS FUNCTION-LIST)</procedure>
+<procedure>(opt-c-functions-set! SASS-OPTIONS FUNCTION-LIST)</procedure>
 
 <procedure>(context-get-output-string SASS-CONTEXT)</procedure>
 
