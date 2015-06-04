@@ -28,9 +28,34 @@ Matt Gushee <matt@gushee.net>
 
 ==== Procedures
 
-<procedure>compile-file      FILENAME  [KWARGS]</procedure>
-<procedure>compile-string    STRING    [KWARGS]</procedure>
-<procedure>compile-from-port PORT      [KWARGS]</procedure>
+<procedure>(compile-file      FILENAME  #!key kwargs)</procedure>
+<procedure>(compile-string    STRING    #!key kwargs)</procedure>
+<procedure>(compile-from-port PORT      #!key kwargs)</procedure>
+
+{{compile-file}}, {{compile-string}}, and {{compile-from-port}} accept the
+following keyword arguments:
+
+
+; output : [string/port - default {{'stdout}}]  The destination for the output. May be a filename, a port, or the symbol {{'stdout}}.
+; precision : [integer - default {{#f}}]  The precision, in number of digits, for decimal numbers.
+; output-style : [symbol - default {{#f}}]  One of {{'nested}}, {{'expanded}}, {{'compact}}, or {{'compressed}}. This option controls the formatting of the output CSS.
+; source-comments : [boolean - default {{'undefined}}]   This option controls whether comments are placed in the output to identify the line number in the source file where each selector is defined.
+; source-map-embed : [boolean - default {{'undefined}}]  Whether to embed {{sourceMappingUrl}} as data URI.
+; source-map-contents : [boolean - default {{'undefined}}]  Whether to embed include contents in sourcemap files. 
+; omit-source-map-url : [boolean - default {{'undefined}}]  Whether to disable {{sourceMappingUrl}} in CSS output. 
+; is-indented-syntax-src : [boolean - default {{'undefined}}]  Assume source file format is SASS rather than SCSS.
+; indent : [string - default {{#f}}]  The string to use for indentation.
+; linefeed : [string - default {{#f}}]  The string to use for linefeeds.
+; input-path : [string - default {{#f}}]  Input path for source map generation.
+; output-path : [string - default {{#f}}]  Output path for source map generation.
+; plugin-path : [string - default {{#f}}]  A list of paths - semicolon-separated on Windows, colon-separated otherwise.
+; include-path : [string - default {{#f}}]  A list of paths - semicolon-separated on Windows, colon-separated otherwise.
+; source-map-file : [string - default {{#f}}]  Path of a source map file.  If non-empty, enables source map generation.
+; source-map-root : [string - default {{#f}}]  Root directory inserted in source maps.
+; c-headers : [default {{#f}}]  No documentation available.
+; c-importers : [default {{#f}}]  Overload imports. 
+; c-functions : [default {{#f}}]  List of custom functions callable from SCSS code.
+
 
 === Low-level API
 
@@ -48,20 +73,15 @@ modules are currently undocumented.
 All the following are foreign types, and can only be created using the
 appropriate API functions.
 
-<type>SASS-OPTIONS</type>
-
-A key-value structure containing various options that control the
-{{*-CONTEXT}} objects. Use {{make-options}} to create. May also be
-obtained using {{context-get-options}}, {{file-context-get-options}},
-or {{data-context-get-options}}.
-
 <type>OPTIONS</type>
 
-Represents a key-value structure of options. Use {{make-options}} to create.
+Represents a key-value structure of options. Use {{make-options}} or
+{{get-options}} to create.
 
 <type>INPUT-CONTEXT</type>
 
-Represents the input file or string. Use {{make-input-context}} to create.
+A record type wrapping either of the foreign pointer types {{Sass_File_Context}} or {{Sass_Data_Context}}, which represent, respectively, the input file or
+string. Use {{make-file-context}} or {{make-data-context}} to create.
 
 <type>CONTEXT</type>
 
@@ -77,25 +97,21 @@ Represents the compiler. Use {{make-compiler}} to create.
 
 <procedure>(make-options)</procedure>
 
-Returns a SASS-OPTIONS object.
+Returns an OPTIONS object.
 
 <procedure>(make-file-context FILENAME)</procedure>
 
-Returns a SASS-FILE-CONTEXT object.
+Returns an INPUT-CONTEXT object with type tag 'file.
 
 <procedure>(make-data-context INPUT-STRING)</procedure>
 
-Returns a SASS-DATA-CONTEXT object.
+Returns an INPUT-CONTEXT object with type tag 'data.
 
-<procedure>(compile-file-context SASS-FILE-CONTEXT)</procedure>
+<procedure>(compile-input-context INPUT-CONTEXT)</procedure>
 
-<procedure>(compile-data-context SASS-DATA-CONTEXT)</procedure>
+The usual method to invoke compilation of a stylesheet.
 
-<procedure>(make-file-compiler SASS-FILE-CONTEXT)</procedure>
-
-Returns a SASS-COMPILER object.
-
-<procedure>(make-data-compiler SASS-DATA-CONTEXT)</procedure>
+<procedure>(make-compiler INPUT-CONTEXT)</procedure>
 
 Returns a SASS-COMPILER object.
 
@@ -105,27 +121,15 @@ Returns a SASS-COMPILER object.
 
 <procedure>(delete-compiler SASS-COMPILER)</procedure>
 
-<procedure>(delete-file-context SASS-FILE-CONTEXT)</procedure>
+<procedure>(delete-input-context INPUT-CONTEXT)</procedure>
 
-<procedure>(delete-data-context SASS-DATA-CONTEXT)</procedure>
+<procedure>(get-context INPUT-CONTEXT)</procedure>
 
-<procedure>(file-context-get-context SASS-FILE-CONTEXT)</procedure>
+Returns a CONTEXT object.
 
-Returns a SASS-CONTEXT object.
+<procedure>(get-options CONTEXT/INPUT-CONTEXT)</procedure>
 
-<procedure>(data-context-get-context SASS-DATA-CONTEXT)</procedure>
-
-Returns a SASS-CONTEXT object.
-
-<procedure>(context-get-options SASS-CONTEXT)</procedure>
-
-<procedure>(file-context-get-options SASS-FILE-CONTEXT)</procedure>
-
-<procedure>(data-context-get-options SASS-DATA-CONTEXT)</procedure>
-
-<procedure>(file-context-set-options! SASS-FILE-CONTEXT SASS-OPTIONS)</procedure>
-
-<procedure>(data-context-set-options! SASS-DATA-CONTEXT SASS-OPTIONS)</procedure>
+<procedure>(set-options! INPUT-CONTEXT OPTIONS)</procedure>
 
 <procedure>(opt-precision SASS-OPTIONS)</procedure>
 
@@ -268,17 +272,17 @@ is adapted from [[https://github.com/sass/libsass/wiki/API-Sass-Context-Example]
                  "styles.scss"
                  (car args)))
              (file-ctx (sass:make-file-context infile))
-             (ctx (sass:file-context-get-context file-ctx))
-             (ctx-opts (sass:context-get-options ctx)))
+             (ctx (sass:get-context file-ctx))
+             (ctx-opts (sass:get-options ctx)))
     
-        (sass:option-set-precision! ctx-opts 10)
+        (sass:opt-precision-set! ctx-opts 10)
     
-        (let ((status (sass:compile-file-context file-ctx)))
+        (let ((status (sass:compile-input-context file-ctx)))
           (if (zero? status)
-            (display (sass:context-get-output-string ctx))
-            (error (sass:context-get-error-message ctx))))
+            (display (sass:output-string ctx))
+            (error (sass:error-message ctx))))
     
-        (sass:delete-file-context file-ctx)))
+        (sass:delete-input-context file-ctx)))
     
     (main)
 
@@ -337,4 +341,6 @@ POSSIBILITY OF SUCH DAMAGE.
 
 === Version History
 
-;0.1:       Initial release.
+; 0.2 : [June 3, 2015] Added high-level {{compile-*}} procedures; merged {{FILE-CONTEXT}} and {{DATA-CONTEXT}} types into new {{INPUT-CONTEXT}} type; made {{sass-context}} API names more concise; moved {{csass}} program into new {{csass-utils}} egg.
+
+; 0.1 : Initial release.
